@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import '../../assets/styles/header.scss'
+import '../../assets/styles/header.scss';
+import logo from '../../assets/images/logobanky.svg';
 
 class Header extends Component {
   render() {
     return (
       <header className="header">
         <div className="header-content">
-          <div className="logo">BANKY</div>
+          <img src={logo} className="logo"></img>
           <ul className="action-menu">
             <li className="menu-itens">
-              DUVIDAS?
             </li>
           </ul>
         </div>
