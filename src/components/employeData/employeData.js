@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../assets/styles/_form.scss';
-import TextField from '@material-ui/core/TextField';
-import { MenuItem } from '@material-ui/core';
+import { MenuItem, Button } from '@material-ui/core';
+import { TextValidator, SelectValidator, ValidatorForm  } from 'react-material-ui-form-validator';
 
 const colors = [
   {
@@ -21,44 +21,67 @@ const colors = [
 class EmployeData extends Component {
 
   state = {
-    color: ''
+    color: '',
+    nome: ''
   }
 
   handleChange = prop => event => {
     this.setState({ [prop]: event.target.value });
   };
 
+  handleBlur = event => {
+    this.refs[event.target.name].validate(event.target.value);
+    setTimeout(() => console.log(this.refs['nome'].state.isValid));
+  }
+
+  handleSubmit = () => {
+    this.setState({ submitted: true }, () => {
+      setTimeout(() => this.setState({ submitted: false }), 5000);
+    });
+  }
+
   render() {
     return (
     <div className="EmployeData">
-      <form className="form">
-        <TextField
+      <ValidatorForm
+        className="form"
+        onSubmit={this.handleSubmit}
+        instantValidate={false}
+      >
+        <TextValidator
           required
+          ref="nome"
+          name="nome"
+          value={this.state.nome}
           className="field"
           label="Nome"
+          validators={['required', 'minStringLength:3']}
+          errorMessages={['Selecione uma cor!', 'Selecione uma cor!']}
+          onChange={this.handleChange('nome')}
+          onBlur={this.handleBlur}
         />
-        <TextField
+        <TextValidator
           required
           className="field"
           label="CNPJ"
           variant="outlined"
           type="number"
         />
-        <TextField
+        <TextValidator
           required
           error
           className="field"
           label="Endereço"
           variant="outlined"
         />
-        <TextField
+        <TextValidator
           className="field"
           label="Idade"
           variant="outlined"
           type="number"
         />
 
-        <TextField
+        <TextValidator
           required
           error
           className="field"
@@ -67,7 +90,7 @@ class EmployeData extends Component {
           helperText="Nome invalido!"
         />
 
-        <TextField
+        <TextValidator
           required
           disabled
           className="field"
@@ -77,23 +100,34 @@ class EmployeData extends Component {
           helperText="Isento!"
         />
 
-        <TextField
+        <SelectValidator
           required
-          select          
+          select
+          ref="color"
           className="field"
           label="Cores"
+          name="color"
+          validators={['required', 'isEmail']}
+          errorMessages={['Selecione uma cor!']}
           variant="outlined"
-          type="text"
           value={this.state.color}
+          type="text"
           onChange={this.handleChange('color')}
+          onBlur={this.handleBlur}
         >
           {colors.map(option => (
             <MenuItem key={option.value} value={option.value}>
               {option.label}
             </MenuItem>
           ))}
-        </TextField>
-      </form>
+        </SelectValidator>
+
+        <Button
+          variant="contained"
+        >
+          Upload
+        </Button>
+      </ValidatorForm>
     </div>
     );
   }
