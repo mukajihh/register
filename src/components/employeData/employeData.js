@@ -1,28 +1,15 @@
 import React, { Component } from 'react';
+import '../../assets/styles/_fonts.scss';
 import '../../assets/styles/_form.scss';
-import { MenuItem, Button } from '@material-ui/core';
+import '../../assets/styles/employeData.scss';
+import { MenuItem, Button, Grid, Fab } from '@material-ui/core';
 import { TextValidator, SelectValidator, ValidatorForm  } from 'react-material-ui-form-validator';
-
-const colors = [
-  {
-    value: 'red',
-    label: 'vermelho'
-  },
-  {
-    value: 'blue',
-    label: 'azul'
-  },
-  {
-    value: 'green',
-    label: 'verde'
-  }
-]
 
 class EmployeData extends Component {
 
   state = {
-    color: '',
-    nome: ''
+    cnpj: '',
+    employeCreateDate: ''
   }
 
   handleChange = prop => event => {
@@ -31,7 +18,9 @@ class EmployeData extends Component {
 
   handleBlur = event => {
     this.refs[event.target.name].validate(event.target.value);
-    setTimeout(() => console.log(this.refs['nome'].state.isValid));
+
+    // use timeout when implements the check icon in the field
+    setTimeout(() => console.log());
   }
 
   handleSubmit = () => {
@@ -42,91 +31,101 @@ class EmployeData extends Component {
 
   render() {
     return (
-    <div className="EmployeData">
+    <div className="employe-data">
+
+      <h2 className="subtitle">Vamos lá!<br/>Agora precisamos dos dados da sua empresa, vai ser rapidinho!</h2>
+
       <ValidatorForm
         className="form"
+        noValidate
         onSubmit={this.handleSubmit}
         instantValidate={false}
       >
+
+        <Grid container spacing={24}>
+          <Grid item xs={6}>
+            <TextValidator
+              ref="cnpj"
+              name="cnpj"
+              value={this.state.cnpj}
+              className="field"
+              label="CNPJ"
+              validators={['required', 'minStringLength:14']}
+              errorMessages={['Digite um CNPJ', 'CNPJ invalido!']}
+              variant="outlined"
+              onChange={this.handleChange('cnpj')}
+              onBlur={this.handleBlur}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextValidator
+              ref="employeCreateDate"
+              name="employeCreateDate"
+              value={this.state.employeCreateDate}
+              className="field"
+              label="Data de abertura da empresa"
+              validators={['required']}
+              type="date"
+              errorMessages={['Digite um CNPJ', 'CNPJ invalido!']}
+              variant="outlined"
+              onChange={this.handleChange('cnpj')}
+              onBlur={this.handleBlur}
+            />
+          </Grid>
+        </Grid>
+
         <TextValidator
-          required
-          ref="nome"
-          name="nome"
-          value={this.state.nome}
+          ref="fantasyName"
+          name="fantasyName"
+          value={this.state.fantasyName}
           className="field"
-          label="Nome"
-          validators={['required', 'minStringLength:3']}
-          errorMessages={['Selecione uma cor!', 'Selecione uma cor!']}
-          onChange={this.handleChange('nome')}
+          label="Nome fantasia"
+          validators={['required']}
+          errorMessages={['Digite o nome fantasia!']}
+          variant="outlined"
+          onChange={this.handleChange('fantasyName')}
           onBlur={this.handleBlur}
         />
-        <TextValidator
-          required
-          className="field"
-          label="CNPJ"
-          variant="outlined"
-          type="number"
-        />
-        <TextValidator
-          required
-          error
-          className="field"
-          label="Endereço"
-          variant="outlined"
-        />
-        <TextValidator
-          className="field"
-          label="Idade"
-          variant="outlined"
-          type="number"
-        />
 
         <TextValidator
-          required
-          error
+          ref="socialName"
+          name="socialName"
+          value={this.state.socialName}
           className="field"
-          label="Nome da Mãe"
+          label="Nome razão social"
+          validators={['required']}
+          errorMessages={['Digite o nome razão social!']}
           variant="outlined"
-          helperText="Nome invalido!"
-        />
-
-        <TextValidator
-          required
-          disabled
-          className="field"
-          label="Taxa"
-          variant="outlined"
-          type="number"
-          helperText="Isento!"
-        />
-
-        <SelectValidator
-          required
-          select
-          ref="color"
-          className="field"
-          label="Cores"
-          name="color"
-          validators={['required', 'isEmail']}
-          errorMessages={['Selecione uma cor!']}
-          variant="outlined"
-          value={this.state.color}
-          type="text"
-          onChange={this.handleChange('color')}
+          onChange={this.handleChange('socialName')}
           onBlur={this.handleBlur}
-        >
-          {colors.map(option => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </SelectValidator>
+        />
 
-        <Button
-          variant="contained"
-        >
-          Upload
-        </Button>
+        
+        <TextValidator
+          ref="segment"
+          name="segment"
+          value={this.state.segment}
+          className="field"
+          label="Ramo de atividade"
+          validators={['required']}
+          errorMessages={['Digite o ramo de atividade']}
+          variant="outlined"
+          onChange={this.handleChange('segment')}
+          onBlur={this.handleBlur}
+        />
+
+        <Grid container spacing={24}>
+          <Grid item xs={6}>
+            <Fab variant="extended" className="button" >
+              Voltar  
+            </Fab>
+          </Grid>
+          <Grid item xs={6}>
+            <Fab variant="extended" className="button action" >
+              Abrir Conta
+            </Fab>
+          </Grid>
+        </Grid>
       </ValidatorForm>
     </div>
     );

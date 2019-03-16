@@ -7,8 +7,24 @@
   margin: 40px auto;
 
   .field {
-    max-width: 300px;
     margin-bottom: 30px;
     width: 100%;
+  }
+  
+  .button {
+    background: #fff;
+    border: solid 1px #0DCA99;
+    width: 100%;
+
+    &:hover { background: #ececec }
+
+    span { color: #0DCA99}
+
+    &.action {
+      background: #0DCA99;
+
+      span { color: #fff}
+
+    }
   }
 }

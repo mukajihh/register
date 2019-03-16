@@ -1,0 +1,20 @@
+.flow-guide-container {
+  background: #F6F6F6;
+  border-right: solid 1px #E8E8E8;
+  height: calc(100vh - 99px);
+
+  .flow-guide-content {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    margin: 55px auto;
+    width: 220px;
+
+    h2.subtitle { margin-bottom: 15px }
+
+    h3.subtitle.minor {
+      color: #8B8B8B;
+      margin-bottom: 45px;
+    }
+  }
+}

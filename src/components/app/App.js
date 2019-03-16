@@ -1,23 +1,33 @@
 import React, { Component } from 'react';
+import '../../assets/styles/_fonts.scss';
 import '../../assets/styles/App.scss';
 import Header from '../header/header'
-import EmployeData from '../employeData/employeData'
-import { Grid } from '@material-ui/core';
+import { Switch, Route } from 'react-router-dom'
+import Registration from '../registration/registration';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
+
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: ['Nunito', 'sans-serif'].join(','),
+    fontWeightLight: 400,
+    fontWeightRegular: 600,
+    fontWeightMedium: 700
+  }
+})
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Header />
-        <Grid container spacing={0}>
-          <Grid item xs={4}>
-          </Grid>
-          <Grid item xs={8}>
-            <EmployeData />
-          </Grid>
-        </Grid>
-
-      </div>
+      <MuiThemeProvider theme={theme}>
+        <div className="App">
+          <Header />
+          <main>
+            <Switch>
+              <Route exact path='/' component={Registration} />
+            </Switch>
+          </main>
+        </div>
+      </MuiThemeProvider>
     );
   }
 }

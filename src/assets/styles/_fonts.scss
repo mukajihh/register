@@ -1,0 +1,22 @@
+.title {
+  font-size: 50px;
+  font-weight: 700;
+  color: #565657;
+
+  &.minor { font-size: 30px }
+  &.white { color: #fff }
+}
+
+.subtitle {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 27px;
+  color: #565657;
+
+  &.minor {
+    font-size: 16px;
+    font-weight: 400px;
+    line-height: 25px;
+  }
+  &.white { color: #fff }
+}
