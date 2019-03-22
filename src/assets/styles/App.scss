@@ -1,1 +1,8 @@
-.App { height: 100vh }
+.App {
+  height: 100vh;
+
+  main {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+}
