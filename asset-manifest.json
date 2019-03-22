@@ -1,14 +1,14 @@
 {
-  "main.css": "/register/static/css/main.70b14b61.chunk.css",
-  "main.js": "/register/static/js/main.8d67cb4d.chunk.js",
-  "main.js.map": "/register/static/js/main.8d67cb4d.chunk.js.map",
+  "main.css": "/register/static/css/main.0e947b8f.chunk.css",
+  "main.js": "/register/static/js/main.a90b35b1.chunk.js",
+  "main.js.map": "/register/static/js/main.a90b35b1.chunk.js.map",
   "runtime~main.js": "/register/static/js/runtime~main.13d1ebc8.js",
   "runtime~main.js.map": "/register/static/js/runtime~main.13d1ebc8.js.map",
   "static/js/2.03693a0a.chunk.js": "/register/static/js/2.03693a0a.chunk.js",
   "static/js/2.03693a0a.chunk.js.map": "/register/static/js/2.03693a0a.chunk.js.map",
   "index.html": "/register/index.html",
-  "precache-manifest.7a5c316ee653506bde491b0208c480b9.js": "/register/precache-manifest.7a5c316ee653506bde491b0208c480b9.js",
+  "precache-manifest.d9ed80684457b228e8c288d84ca6119b.js": "/register/precache-manifest.d9ed80684457b228e8c288d84ca6119b.js",
   "service-worker.js": "/register/service-worker.js",
-  "static/css/main.70b14b61.chunk.css.map": "/register/static/css/main.70b14b61.chunk.css.map",
+  "static/css/main.0e947b8f.chunk.css.map": "/register/static/css/main.0e947b8f.chunk.css.map",
   "static/media/logobanky.svg": "/register/static/media/logobanky.6d91fab5.svg"
 }
