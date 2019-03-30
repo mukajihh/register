@@ -7,21 +7,23 @@
   margin: 40px auto;
 
   .field {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     width: 100%;
   }
   
   .button {
     background: #fff;
-    border: solid 1px #0DCA99;
+    border: solid 1px #7BE115;
     width: 100%;
+    border-radius: 0;
+    box-shadow: none;
 
     &:hover { background: #ececec }
 
-    span { color: #0DCA99}
+    span { color: #7BE115}
 
     &.action {
-      background: #0DCA99;
+      background: #7BE115;
 
       span { color: #fff}
 

@@ -10,10 +10,10 @@ import FlowGuide from '../flowGuide/flowGuide';
 import { ValidatorForm } from 'react-material-ui-form-validator';
 const theme = createMuiTheme({
   typography: {
-    fontFamily: ['Nunito', 'sans-serif'].join(','),
-    fontWeightLight: 400,
-    fontWeightRegular: 600,
-    fontWeightMedium: 700
+    fontFamily: ['Open Sans', 'sans-serif'].join(','),
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 600
   }
 })
 
@@ -54,41 +54,33 @@ class App extends Component {
                 <FlowGuide activeStep={this.state.activeStep}/>
               </Grid>
               <Grid item xs={8} className="form-container">
-                <Grid container spacing={0}>
-                  
-                  <ValidatorForm
-                    className="form"
-                    noValidate
-                    onSubmit={this.handleSubmit}
-                    instantValidate={false}
-                  >
-                    <Grid item xs={12}>
-                      <Switch>
-                        <Route exact path='/register' component={EmployeData} />
-                      </Switch>
-                    </Grid>
+                <Grid container spacing={0} className="form" justify="center">
+                  <Grid item xs={6}>
+                    <Switch>
+                      <Route exact path='/register' component={EmployeData} />
+                    </Switch>
+                  </Grid>
 
-                    <Grid container spacing={24} justify="center">
-                      <Grid item xs={4}>
-                        <Fab
-                          variant="extended"
-                          className="button"
-                          onClick={this.goToPrevForm}
-                        >
-                          Voltar  
-                        </Fab>
-                      </Grid>
-                      <Grid item xs={4}>
-                        <Fab
-                          variant="extended"
-                          className="button action"
-                          onClick={this.goToNextForm}
-                        >
-                          Abrir Conta
-                        </Fab>
-                      </Grid>
+                  <Grid container spacing={16} justify="center">
+                    <Grid item xs={3}>
+                      <Fab
+                        variant="extended"
+                        className="button"
+                        onClick={this.goToPrevForm}
+                      >
+                        Voltar  
+                      </Fab>
                     </Grid>
-                  </ValidatorForm>
+                    <Grid item xs={3}>
+                      <Fab
+                        variant="extended"
+                        className="button action"
+                        onClick={this.goToNextForm}
+                      >
+                        Abrir Conta
+                      </Fab>
+                    </Grid>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>

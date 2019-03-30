@@ -1,57 +1,72 @@
 .flow-guide-container {
-  background: #F6F6F6;
-  border-right: solid 1px #E8E8E8;
-  height: calc(100vh - 99px);
-
-  &:before {
-    content: '';
-    display: block;
-    position: fixed;
-    height: 100%;
-    width: 35vw;
-    left: 0;
-    z-index: -1;
-    background: #F6F6F6;
-    border-right: solid 1px #E8E8E8;
-  }
 
   .flow-guide-content {
+    position: relative;
     display: flex;
+    height: 100%;
     flex-direction: column;
     align-content: flex-start;
+    background: #F6F6F6;
+    border-right: solid 1px #E8E8E8;
+    padding: 60px 20px 0;
 
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      height: 100%;
+      width: 35vw;
+      top: 0;
+      right: 100%;
+      z-index: -1;
+      background: #F6F6F6;
+    }
+  
     h2.subtitle { margin-bottom: 15px }
 
     h3.subtitle.minor {
-      color: #8B8B8B;
-      margin-bottom: 45px;
+      margin-bottom: 40px;
     }
 
     .flow-guide-stepper {
       background: transparent;
+      padding: 0;
 
       > div {
-        &[class*="Connector"] {
+        &[class*="195"] {
           padding: 0;
+          margin-left: 6px;
           
           span { height: 35px }
         }
 
-        &[class*="completed"], &[class*="active"] {
+        &[class*="completed"], &[class*="199"] {
           > span {
             border-color: #7BE115;
           }
 
-          .flow-guide-step-name > span:first-of-type::before {
-            background-color: #7BE115 !important;
-            border-color: #7BE115;
+          .flow-guide-step-name {
+            span { font-weight: 300 !important }
+            
+            > span:first-of-type::before {
+              background-color: #7BE115 !important;
+              border-color: #7BE115;
+            }
+          }
+
+          .flow-guide-step-content {
+            border-left: 1px solid #7BE115;
           }
         }
 
-        &:first-child, &[class*="active"] + div {
-          .flow-guide-step-name > span:first-of-type::before {
-            background-color: transparent;
-            border-color: #7BE115;
+        &:first-child, &[class*="199"] + div {
+          .flow-guide-step-name {
+            span { font-weight: 400 }
+
+            > span:first-of-type::before {
+              background-color: transparent;
+              border-color: #7BE115;
+            }
           }
         }
 
@@ -61,7 +76,11 @@
           svg { display: none }
 
           span {
+            font-size: 12px;
             line-height: 12px;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 300;
+            color: #000;
           }
 
           > span:first-of-type {
@@ -76,13 +95,20 @@
               background-color: #D1D1D1;
               border: solid 2px #D1D1D1;
               border-radius: 9px;
-              margin-left: 6px;
             }
           }
         }
+
         .flow-guide-step-content {
+          color: #AAA;
+          font-family: 'Open Sans', sans-serif;      
+          font-size: 12px;
+          font-weight: 400;
+          line-height: 12px;
           margin-top: 0;
-          padding-left: 38px;
+          margin-left: 6px;
+          max-width: 200px;
+          padding: 5px 0 0 38px;
         }
       }
     }

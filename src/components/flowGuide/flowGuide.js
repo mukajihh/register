@@ -13,7 +13,7 @@ class FlowGuide extends Component {
     return (
       <div className="flow-guide-content">
         <h2 className="subtitle">Tenha em mãos:</h2>
-        <h3 className="subtitle minor">RG ou CNH;<br/>Contrato social da empresa Comprovante de residência</h3>
+        <h3 className="subtitle minor">Contrato Social da Empresa<br/>Documento pessoal (CNH, RG ou CPF)</h3>
 
         <Stepper
           activeStep={this.props.activeStep}
@@ -21,7 +21,14 @@ class FlowGuide extends Component {
           className="flow-guide-stepper"
         >
           <Step
-            key="teste"
+            key="Dados do responsável da conta"
+            className="flow-guide-step"
+            classes={{completed: 'completed'}}
+          >
+            <StepLabel className="flow-guide-step-name">Dados do responsável da conta</StepLabel>
+          </Step>
+          <Step
+            key="Dados da empresa"
             className="flow-guide-step"
             classes={{completed: 'completed'}}
           >
@@ -29,7 +36,7 @@ class FlowGuide extends Component {
             <StepContent className="flow-guide-step-content">Usamos essas informações para validar os dados da pessoa jurídica.</StepContent>
           </Step>
           <Step
-            key="teste 2"
+            key="Endereço da empresa"
             className="flow-guide-step"
             classes={{completed: 'completed'}}
           >
@@ -37,35 +44,28 @@ class FlowGuide extends Component {
             <StepContent className="flow-guide-step-content">Informe corretamente os dados do endereço da empresa.</StepContent>
           </Step>
           <Step
-            key="teste 3"
+            key="Endereço de correspondência"
             className="flow-guide-step"
             classes={{completed: 'completed'}}
           >
             <StepLabel className="flow-guide-step-name">Endereço de correspondência</StepLabel>
           </Step>
           <Step
-            key="teste 4"
-            className="flow-guide-step"
-            classes={{completed: 'completed'}}
-          >
-            <StepLabel className="flow-guide-step-name">Dados do responsável da conta</StepLabel>
-          </Step>
-          <Step
-            key="teste 5"
+            key="Dados de acesso à conta"
             className="flow-guide-step"
             classes={{completed: 'completed'}}
           >
             <StepLabel className="flow-guide-step-name">Dados de acesso à conta</StepLabel>
           </Step>
           <Step
-            key="teste 6"
+            key="Confirmação de dados"
             className="flow-guide-step"
             classes={{completed: 'completed'}}
           >
-            <StepLabel className="flow-guide-step-name">Confirmação das informações</StepLabel>
+            <StepLabel className="flow-guide-step-name">Confirmação de dados</StepLabel>
           </Step>
           <Step
-            key="teste 7"
+            key="Abertura de conta"
             className="flow-guide-step"
             classes={{completed: 'completed'}}
           >

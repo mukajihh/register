@@ -11,6 +11,7 @@ $grid-width: 1080px;
   height: $header-height;
   position: relative;
   width: 100%;
+  z-index: 10;
 
   .header-content {
     display: flex;
