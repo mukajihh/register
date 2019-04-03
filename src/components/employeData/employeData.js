@@ -6,7 +6,7 @@ import { Grid } from '@material-ui/core';
 import NumberFormat from 'react-number-format';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
-function NumberFormatCustom(props) {
+function CnpjFormat(props) {
   const { inputRef, onChange, ...other } = props;
 
   return (
@@ -29,7 +29,15 @@ class EmployeData extends Component {
 
   state = {
     cnpj: '',
-    employeCreateDate: 'YYYY-MM-DD'
+    employeCreateDate: new Date().toISOString().split('T')[0]
+  }
+
+  componentDidMount() {
+    this.props.onRef(this);
+    const cnpjValidator = require('../../utils/CnpjValidator').CnpjValidator;
+    ValidatorForm.addValidationRule('cnpjValidator', value => {
+      return cnpjValidator(value);
+    });
   }
 
   handleChange = prop => event => {
@@ -37,10 +45,21 @@ class EmployeData extends Component {
   };
 
   handleBlur = event => {
-    this.refs[event.target.name].validate(event.target.value);
+    let textValidator = this.refs[event.target.name];
+    textValidator.validate(event.target.value);
 
     // use timeout when implements the check icon in the field
-    setTimeout(() => console.log());
+    setTimeout(() => {
+      console.log(textValidator)
+    });
+  }
+
+  submit = () => {
+    this.refs.form.submit();
+  }
+
+  handleSubmit = () => {
+    this.props.goToNextForm();
   }
 
   render() {
@@ -49,8 +68,8 @@ class EmployeData extends Component {
 
       <h2 className="title">Dados da&nbsp;<b>pessoa jurídica</b><span className="endpoint"></span></h2>
 
-      
       <ValidatorForm
+        ref="form"
         noValidate
         onSubmit={this.handleSubmit}
         instantValidate={false}
@@ -64,9 +83,9 @@ class EmployeData extends Component {
               className="field"
               label="CNPJ"
               InputProps={{
-                inputComponent: NumberFormatCustom
+                inputComponent: CnpjFormat
               }}
-              validators={['required', 'minStringLength:14']}
+              validators={['required', 'cnpjValidator']}
               errorMessages={['Digite um CNPJ', 'CNPJ invalido!']}
               onChange={this.handleChange('cnpj')}
               onBlur={this.handleBlur}
@@ -81,7 +100,7 @@ class EmployeData extends Component {
               label="Data de abertura da empresa"
               validators={['required']}
               type="date"
-              errorMessages={['Digite um CNPJ', 'CNPJ invalido!']}
+              errorMessages={['Digite um data', 'Data invalida!']}
               onChange={this.handleChange('employeCreateDate')}
               onBlur={this.handleBlur}
             />

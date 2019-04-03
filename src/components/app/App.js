@@ -3,11 +3,13 @@ import '../../assets/styles/_fonts.scss';
 import '../../assets/styles/_form.scss';
 import '../../assets/styles/App.scss';
 import Header from '../header/header'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, withRouter } from 'react-router-dom'
 import { MuiThemeProvider, createMuiTheme, Grid, Fab } from '@material-ui/core';
 import EmployeData from '../employeData/employeData';
 import FlowGuide from '../flowGuide/flowGuide';
-import { ValidatorForm } from 'react-material-ui-form-validator';
+import OwnerData from '../ownerData/ownerData';
+import AccountData from '../accountData/accountData';
+
 const theme = createMuiTheme({
   typography: {
     fontFamily: ['Open Sans', 'sans-serif'].join(','),
@@ -32,6 +34,7 @@ class App extends Component {
   goToPrevForm = () => {
     const step = this.state.activeStep - 1;
     if (step >= 0) {
+      this.props.history.push(`/step-${step+1}`)
       this.setState({ activeStep: step });
     }
   }
@@ -39,6 +42,7 @@ class App extends Component {
   goToNextForm = () => {
     const step = this.state.activeStep + 1;
     if (step <= 6) {
+      this.props.history.push(`/step-${step+1}`)
       this.setState({ activeStep: step });
     }
   }
@@ -57,28 +61,41 @@ class App extends Component {
                 <Grid container spacing={0} className="form" justify="center">
                   <Grid item xs={6}>
                     <Switch>
-                      <Route exact path='/register' component={EmployeData} />
+                      <Route exact path='/step-1' render={() => <OwnerData onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                      <Route exact path='/step-2' render={() => <EmployeData onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                      <Route exact path='/step-3' render={() => <EmployeData onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                      <Route exact path='/step-4' render={() => <EmployeData onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                      <Route exact path='/step-5' render={() => <AccountData onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                      <Route exact path='/step-6' render={() => <EmployeData onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                      <Route exact path='/step-7' render={() => <EmployeData onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
                     </Switch>
                   </Grid>
 
-                  <Grid container spacing={16} justify="center">
-                    <Grid item xs={3}>
-                      <Fab
-                        variant="extended"
-                        className="button"
-                        onClick={this.goToPrevForm}
-                      >
-                        Voltar  
-                      </Fab>
-                    </Grid>
-                    <Grid item xs={3}>
-                      <Fab
-                        variant="extended"
-                        className="button action"
-                        onClick={this.goToNextForm}
-                      >
-                        Abrir Conta
-                      </Fab>
+                  <Grid item xs={12}>
+                    <Grid container spacing={0} justify="center">
+                      <Grid item xs={6}>
+                        <Grid container spacing={24} justify="center">
+                        
+                          <Grid item xs={6}>
+                            <Fab
+                              variant="extended"
+                              className="button"
+                              onClick={this.goToPrevForm}
+                            >
+                              Voltar  
+                            </Fab>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <Fab
+                              variant="extended"
+                              className="button action"
+                              onClick={() => this.child.submit()}
+                            >
+                              Continuar
+                            </Fab>
+                          </Grid>
+                        </Grid>
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -91,4 +108,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

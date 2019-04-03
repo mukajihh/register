@@ -9,6 +9,47 @@
   .field {
     margin-bottom: 10px;
     width: 100%;
+
+    label {
+      font-size: 13px;
+      color: #8B8B8B;
+      opacity: 0.7;
+      top: -3px;
+
+      &[class*="223"] {
+        transform: translate(0, 2.5px) scale(0.75);
+      }
+
+      &[class*="219"] {
+        color: #8B8B8B;
+      }
+
+      &[class*="231"]:not([class*="219"]) + div .check {
+        display: flex;
+      }
+    }
+
+    > div {
+
+      input {
+        font-size: 13px;
+
+        &[class*="260"] {
+          height: 1.45em;
+        }
+      }
+
+      .check {
+        color: #7BE115;
+        display: none;
+      }
+
+      &:before, &:after {
+        border-bottom-width: 1px !important;
+      }
+
+      &:after { border-color: #7BE115 }
+    }
   }
   
   .button {
@@ -17,6 +58,7 @@
     width: 100%;
     border-radius: 0;
     box-shadow: none;
+    font-size: 12px;
 
     &:hover { background: #ececec }
 
@@ -26,7 +68,6 @@
       background: #7BE115;
 
       span { color: #fff}
-
     }
   }
 }
