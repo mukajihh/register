@@ -1,0 +1,14 @@
+.owner-data {
+  display: flex;
+  flex-direction: column;
+  margin: 55px auto;
+
+  h2.subtitle { font-weight: 700 }
+
+  form .archive-label {
+    font-size: 13px;
+    line-height: 16px;
+    color: #A8A8A8;
+    padding: 0 12px;
+  }
+}

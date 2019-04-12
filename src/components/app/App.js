@@ -9,6 +9,10 @@ import EmployeData from '../employeData/employeData';
 import FlowGuide from '../flowGuide/flowGuide';
 import OwnerData from '../ownerData/ownerData';
 import AccountData from '../accountData/accountData';
+import EmployeAddress from '../employeAddress/employeAddress';
+import DeliveryAddress from '../deliveryAddress/deliveryAddress';
+import OwnerAddress from '../ownerAddress/ownerAddress';
+import ConfirmationData from '../ConfirmationData/confirmationData';
 
 const theme = createMuiTheme({
   typography: {
@@ -22,7 +26,56 @@ const theme = createMuiTheme({
 class App extends Component {
 
   state = {
-    activeStep: 0
+    activeStep: 0,
+
+    user: {
+      ownerData: {
+        name: '',
+        cpf: '',
+        birthDate: new Date().setFullYear(new Date().getFullYear() - 16),
+        telphone: '',
+        motherName: ''
+      },
+      ownerAddress: {
+        cep: '',
+        district: '',
+        street: '',
+        number: '',
+        complement: '',
+        city: '',
+        state: ''
+      },
+      employeData: {
+        cnpj: '',
+        employeCreateDate: new Date().toISOString().split('T')[0],
+        fantasyName: '',
+        socialName: '',
+        segment: ''
+      },
+      employeAddress: {
+        cep: '',
+        district: '',
+        street: '',
+        number: '',
+        complement: '',
+        city: '',
+        state: ''
+      },
+      deliveryAddress: {
+        cep: '',
+        district: '',
+        street: '',
+        number: '',
+        complement: '',
+        city: '',
+        state: ''
+      },
+      accountData: {
+        email: '',
+        celphone: '',
+        password: ''
+      }
+    }
   }
 
   handleSubmit = () => {
@@ -61,13 +114,14 @@ class App extends Component {
                 <Grid container spacing={0} className="form" justify="center">
                   <Grid item xs={6}>
                     <Switch>
-                      <Route exact path='/step-1' render={() => <OwnerData onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
-                      <Route exact path='/step-2' render={() => <EmployeData onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
-                      <Route exact path='/step-3' render={() => <EmployeData onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
-                      <Route exact path='/step-4' render={() => <EmployeData onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
-                      <Route exact path='/step-5' render={() => <AccountData onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
-                      <Route exact path='/step-6' render={() => <EmployeData onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
-                      <Route exact path='/step-7' render={() => <EmployeData onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                      <Route exact path='/step-1' render={() => <OwnerData user={this.state.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                      <Route exact path='/step-2' render={() => <OwnerAddress user={this.state.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                      <Route exact path='/step-3' render={() => <EmployeData user={this.state.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                      <Route exact path='/step-4' render={() => <EmployeAddress user={this.state.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                      <Route exact path='/step-5' render={() => <DeliveryAddress user={this.state.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                      <Route exact path='/step-6' render={() => <AccountData user={this.state.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                      <Route exact path='/step-7' render={() => <ConfirmationData onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                      <Route exact path='/step-8' render={() => <EmployeData onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
                     </Switch>
                   </Grid>
 

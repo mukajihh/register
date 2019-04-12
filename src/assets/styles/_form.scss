@@ -11,10 +11,8 @@
     width: 100%;
 
     label {
-      font-size: 13px;
       color: #8B8B8B;
       opacity: 0.7;
-      top: -3px;
 
       &[class*="223"] {
         transform: translate(0, 2.5px) scale(0.75);
@@ -30,25 +28,29 @@
     }
 
     > div {
+      font-size: 15px;
 
-      input {
-        font-size: 13px;
-
-        &[class*="260"] {
-          height: 1.45em;
-        }
-      }
+      &:hover::before { border-width: 1px !important; }
 
       .check {
         color: #7BE115;
         display: none;
       }
 
-      &:before, &:after {
-        border-bottom-width: 1px !important;
+      &:after {
+        border-color: #7BE115;
+        border-width: 1px;
       }
 
-      &:after { border-color: #7BE115 }
+      &[class*="239"]:after {
+        border-color: #f44336;
+      }
+    }
+
+    p {
+      text-align: right;
+      font-size: 10px;
+      margin-top: 5px;
     }
   }
   

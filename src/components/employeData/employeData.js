@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import '../../assets/styles/_fonts.scss';
 import '../../assets/styles/_form.scss';
 import '../../assets/styles/employeData.scss';
-import { Grid } from '@material-ui/core';
+import { Grid, InputAdornment } from '@material-ui/core';
 import NumberFormat from 'react-number-format';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import DoneIcon from '@material-ui/icons/Done'
 
 function CnpjFormat(props) {
   const { inputRef, onChange, ...other } = props;
@@ -28,8 +29,11 @@ function CnpjFormat(props) {
 class EmployeData extends Component {
 
   state = {
-    cnpj: '',
-    employeCreateDate: new Date().toISOString().split('T')[0]
+    cnpj: this.props.user.employeData.cnpj,
+    employeCreateDate: this.props.user.employeData.employeCreateDate,
+    fantasyName: this.props.user.employeData.fantasyName,
+    socialName: this.props.user.employeData.socialName,
+    segment: this.props.user.employeData.segment
   }
 
   componentDidMount() {
@@ -47,11 +51,6 @@ class EmployeData extends Component {
   handleBlur = event => {
     let textValidator = this.refs[event.target.name];
     textValidator.validate(event.target.value);
-
-    // use timeout when implements the check icon in the field
-    setTimeout(() => {
-      console.log(textValidator)
-    });
   }
 
   submit = () => {
@@ -59,6 +58,12 @@ class EmployeData extends Component {
   }
 
   handleSubmit = () => {
+    this.props.user.employeData.cnpj = this.state.cnpj;
+    this.props.user.employeData.employeCreateDate = this.state.employeCreateDate;
+    this.props.user.employeData.fantasyName = this.state.fantasyName;
+    this.props.user.employeData.socialName = this.state.socialName;
+    this.props.user.employeData.segment = this.state.segment;
+
     this.props.goToNextForm();
   }
 
@@ -82,13 +87,18 @@ class EmployeData extends Component {
               value={this.state.cnpj}
               className="field"
               label="CNPJ"
-              InputProps={{
-                inputComponent: CnpjFormat
-              }}
               validators={['required', 'cnpjValidator']}
               errorMessages={['Digite um CNPJ', 'CNPJ invalido!']}
               onChange={this.handleChange('cnpj')}
               onBlur={this.handleBlur}
+              InputProps={{
+                inputComponent: CnpjFormat,
+                endAdornment: (
+                  <InputAdornment position="end" className="check">
+                    <DoneIcon className="check-icon" />
+                  </InputAdornment>
+                )
+              }}
             />
           </Grid>
           <Grid item xs={6}>
@@ -103,6 +113,13 @@ class EmployeData extends Component {
               errorMessages={['Digite um data', 'Data invalida!']}
               onChange={this.handleChange('employeCreateDate')}
               onBlur={this.handleBlur}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end" className="check">
+                    <DoneIcon className="check-icon" />
+                  </InputAdornment>
+                )
+              }}
             />
           </Grid>
         </Grid>
@@ -117,6 +134,13 @@ class EmployeData extends Component {
           errorMessages={['Digite o nome fantasia!']}
           onChange={this.handleChange('fantasyName')}
           onBlur={this.handleBlur}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end" className="check">
+                <DoneIcon className="check-icon" />
+              </InputAdornment>
+            )
+          }}
         />
 
         <TextValidator
@@ -129,6 +153,13 @@ class EmployeData extends Component {
           errorMessages={['Digite o nome razão social!']}
           onChange={this.handleChange('socialName')}
           onBlur={this.handleBlur}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end" className="check">
+                <DoneIcon className="check-icon" />
+              </InputAdornment>
+            )
+          }}
         />
 
         <TextValidator
@@ -141,6 +172,13 @@ class EmployeData extends Component {
           errorMessages={['Digite o ramo de atividade']}
           onChange={this.handleChange('segment')}
           onBlur={this.handleBlur}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end" className="check">
+                <DoneIcon className="check-icon" />
+              </InputAdornment>
+            )
+          }}
         />
       </ValidatorForm>
     </div>

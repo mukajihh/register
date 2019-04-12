@@ -2,15 +2,36 @@ import React, { Component } from 'react';
 import '../../assets/styles/_fonts.scss';
 import '../../assets/styles/_form.scss';
 import '../../assets/styles/accountData.scss';
-import { Grid, InputAdornment, Fab } from '@material-ui/core';
+import { Grid, InputAdornment } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import DoneIcon from '@material-ui/icons/Done'
+import NumberFormat from 'react-number-format';
+
+function TelFormat(props) {
+  const { inputRef, onChange, ...other } = props;
+
+  return (
+    <NumberFormat
+      {...other}
+      getInputRef={inputRef}
+      onValueChange={values => {
+        onChange({
+          target: {
+            value: values.value,
+          },
+        });
+      }}
+      format="(##) #####-####"
+    />
+  );
+}
 
 class AccountData extends Component {
 
   state = {
-    cpf: '',
-    birthDate: new Date().toISOString().split('T')[0]
+    email: this.props.user.deliveryAddress.email,
+    celphone: this.props.user.deliveryAddress.celphone,
+    password: this.props.user.deliveryAddress.password,
   }
 
   componentDidMount() {
@@ -27,9 +48,6 @@ class AccountData extends Component {
 
   handleBlur = event => {
     this.refs[event.target.name].validate(event.target.value);
-
-    // use timeout when implements the check icon in the field
-    setTimeout(() => console.log());
   }
 
   submit = () => {
@@ -37,6 +55,10 @@ class AccountData extends Component {
   }
 
   handleSubmit = () => {
+    this.props.user.deliveryAddress.email = this.state.email;
+    this.props.user.deliveryAddress.celphone = this.state.celphone;
+    this.props.user.deliveryAddress.password = this.state.password;
+
     this.props.goToNextForm();
   }
 
@@ -44,7 +66,7 @@ class AccountData extends Component {
     return (
     <div className="account-data">
 
-      <h2 className="title">Dados do&nbsp;<b>responsável da conta</b><span className="endpoint"></span></h2>
+      <h2 className="title">Dados de&nbsp;<b>acesso à conta</b><span className="endpoint"></span></h2>
 
       <ValidatorForm
         ref="form"
@@ -61,9 +83,29 @@ class AccountData extends Component {
           label="E-mail (Este será o seu login)"
           validators={['required', 'isEmail']}
           errorMessages={['Digite o E-mail!', 'E-mail invalido']}
-          onChange={this.handleChange('name')}
+          onChange={this.handleChange('email')}
           onBlur={this.handleBlur}
           InputProps={{
+            endAdornment: (
+              <InputAdornment position="end" className="check">
+                <DoneIcon className="check-icon" />
+              </InputAdornment>
+            )
+          }}
+        />
+
+        <TextValidator
+          ref="celphone"
+          name="celphone"
+          value={this.state.celphone}
+          className="field"
+          label="Número de celular"
+          validators={['required']}
+          errorMessages={['Digite o E-mail!']}
+          onChange={this.handleChange('celphone')}
+          onBlur={this.handleBlur}
+          InputProps={{
+            inputComponent: TelFormat,
             endAdornment: (
               <InputAdornment position="end" className="check">
                 <DoneIcon className="check-icon" />
