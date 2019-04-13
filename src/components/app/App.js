@@ -32,7 +32,7 @@ class App extends Component {
       ownerData: {
         name: '',
         cpf: '',
-        birthDate: new Date().setFullYear(new Date().getFullYear() - 16),
+        birthDate: new Date(new Date().setFullYear(new Date().getFullYear() - 16)),
         telphone: '',
         motherName: ''
       },
@@ -93,6 +93,7 @@ class App extends Component {
   }
 
   goToNextForm = () => {
+    console.log(this.state.user.ownerData);
     const step = this.state.activeStep + 1;
     if (step <= 6) {
       this.props.history.push(`/step-${step+1}`)
@@ -120,7 +121,7 @@ class App extends Component {
                       <Route exact path='/step-4' render={() => <EmployeAddress user={this.state.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
                       <Route exact path='/step-5' render={() => <DeliveryAddress user={this.state.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
                       <Route exact path='/step-6' render={() => <AccountData user={this.state.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
-                      <Route exact path='/step-7' render={() => <ConfirmationData onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                      <Route exact path='/step-7' render={() => <ConfirmationData user={this.state.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
                       <Route exact path='/step-8' render={() => <EmployeData onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
                     </Switch>
                   </Grid>

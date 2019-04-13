@@ -1,0 +1,44 @@
+.confirmation-data {
+  display: flex;
+  flex-direction: column;
+  margin: 55px auto;
+
+  h2.subtitle { font-weight: 700 }
+
+  .confirmation-container {
+
+    margin: 5px 0;
+
+    .confirmation-section {
+      background: #FDFDFD;
+
+      .confirmation-section-title {
+        color: #7BE115;
+        font-family: 'helvetica-neue-bold';
+        font-size: 9px;
+        font-weight: bold;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+      }
+
+      .confirmation-field {
+        margin: 10px 0;
+
+        .confirmation-field-value {
+          font-family: 'Open Sans', sans-serif;
+          font-size: 15px;
+          display: block;
+          border-bottom: solid .5px #A8A8A8;
+          padding-bottom: 2px;
+        }
+
+        .confirmation-field-label {
+          font-family: 'Open Sans', sans-serif;
+          font-size: 12px;
+          font-weight: 300;
+          color: #909090;
+        }
+      }
+    }
+  }
+}
