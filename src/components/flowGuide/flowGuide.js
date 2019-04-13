@@ -26,6 +26,15 @@ class FlowGuide extends Component {
             classes={{completed: 'completed'}}
           >
             <StepLabel className="flow-guide-step-name">Dados do responsável da conta</StepLabel>
+            <StepContent className="flow-guide-step-content">Usamos essas informações para Validar os dados da pessoa jurídica</StepContent>
+          </Step>
+          <Step
+            key="Endereço do responsável da conta"
+            className="flow-guide-step"
+            classes={{completed: 'completed'}}
+          >
+            <StepLabel className="flow-guide-step-name">Endereço do responsável da conta</StepLabel>
+            <StepContent className="flow-guide-step-content">Usamos essas informações para Validar os dados da pessoa jurídica</StepContent>
           </Step>
           <Step
             key="Dados da empresa"
@@ -41,7 +50,7 @@ class FlowGuide extends Component {
             classes={{completed: 'completed'}}
           >
             <StepLabel className="flow-guide-step-name">Endereço da empresa</StepLabel>
-            <StepContent className="flow-guide-step-content">Informe corretamente os dados do endereço da empresa.</StepContent>
+            <StepContent className="flow-guide-step-content">Usamos essas informações para validar os dados da pessoa jurídica.</StepContent>
           </Step>
           <Step
             key="Endereço de correspondência"
@@ -49,6 +58,7 @@ class FlowGuide extends Component {
             classes={{completed: 'completed'}}
           >
             <StepLabel className="flow-guide-step-name">Endereço de correspondência</StepLabel>
+            <StepContent className="flow-guide-step-content">O endereço preenchido será utilizado para envio do cartão Banky da sua empresa.</StepContent>
           </Step>
           <Step
             key="Dados de acesso à conta"

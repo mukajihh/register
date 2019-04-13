@@ -87,14 +87,14 @@ class EmployeAddress extends Component {
         <Grid container spacing={24}>
           <Grid item xs={6}>
             <TextValidator
-              ref="CEP"
-              name="CEP"
-              value={this.state.CEP}
+              ref="cep"
+              name="cep"
+              value={this.state.cep}
               className="field"
               label="CEP"
               validators={['required']}
               errorMessages={['Digite um CEP']}
-              onChange={this.handleChange('CEP')}
+              onChange={this.handleChange('cep')}
               onBlur={this.handleBlur}
               InputProps={{
                 inputComponent: CepFormat,
