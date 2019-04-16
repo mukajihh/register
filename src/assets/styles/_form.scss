@@ -7,7 +7,6 @@
   margin: 40px auto;
 
   .field {
-    margin-bottom: 10px;
     width: 100%;
 
     label {
@@ -29,6 +28,7 @@
 
     > div {
       font-size: 15px;
+      margin-bottom: 12px;
 
       &:hover::before { border-width: 1px !important; }
 
@@ -50,7 +50,7 @@
     p {
       text-align: right;
       font-size: 10px;
-      margin-top: 5px;
+      margin-top: -10px;
     }
   }
   
@@ -70,6 +70,33 @@
       background: #7BE115;
 
       span { color: #fff}
+    }
+  }
+
+  .field-error {
+    font-size: 10px;
+    margin-top: -10px;
+    color: #f44336;
+    font-family: 'Open Sans', sans-serif;
+  }
+}
+.radio-group {
+  margin-bottom: 5px;
+
+  label.control-label {
+    span.radio {
+      padding: 10px 5px;
+      margin-left: 7px;
+      svg {
+        height: 16px;
+        width: 16px;
+      }
+    }
+
+    span:last-child {
+      color: #8B8B8B;
+      font-size: 14px;
+      font-family: 'Nunito', sans-serif;
     }
   }
 }

@@ -7,7 +7,7 @@ import NumberFormat from 'react-number-format';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import ValidatedDatePicker from '../../utils/validatedDatePicker';
 import DoneIcon from '@material-ui/icons/Done';
-import { MuiPickersUtilsProvider } from 'material-ui-pickers';
+import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
 import MomentUtils from "@date-io/moment";
 import moment from "moment";
 import "moment/locale/pt-br";
@@ -27,6 +27,25 @@ function CpfFormat(props) {
         });
       }}
       format="###.###.###-##"
+    />
+  );
+}
+
+function DateFormat(props) {
+  const { inputRef, onChange, ...other } = props;
+
+  return (
+    <NumberFormat
+      {...other}
+      getInputRef={inputRef}
+      onValueChange={values => {
+        onChange({
+          target: {
+            value: values.value,
+          },
+        });
+      }}
+      format="##/##/####"
     />
   );
 }
@@ -95,6 +114,37 @@ class OwnerData extends Component {
     const cpfValidator = require('../../utils/CpfValidator').CpfValidator;
     ValidatorForm.addValidationRule('cpfValidator', value => {
       return cpfValidator(value);
+    });
+    const dateValidator = require('../../utils/dateValidator').DateValidator;
+    ValidatorForm.addValidationRule('dateValidator', value => {
+      if (dateValidator(value)) {
+        var parts = value.split("/");
+        var birthDate = new Date(parts[2], parts[1] - 1, parts[0])
+        
+        if (isNaN(birthDate.getFullYear())) {          
+          return false;
+        }
+        
+        if (birthDate.getFullYear() < 1900) {
+          return false;
+        }
+
+        let today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        let m = today.getMonth() - birthDate.getMonth();
+
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        if (age < 16) {
+          return false;
+        }
+
+      } else {
+        return false;
+      }
+
+      return true;
     });
   }
 
@@ -185,56 +235,29 @@ class OwnerData extends Component {
             />
           </Grid>
           <Grid item xs={6}>
-
-            <MuiPickersUtilsProvider utils={MomentUtils} locale="pt-br" moment={moment}>
-              <ValidatedDatePicker
-                autoOk
-                disableFuture
-                openToYearSelection
-                className="field"
-                label="Data de nascimento"
-                name="birthDate"
-                value={this.state.birthDate}
-                onChange={this.handleChange('birthDate')}
-                maxDate={new Date().setFullYear(new Date().getFullYear() - 16)}
-                format={"DD/MM/YYYY"}
-                views={["year", "month", "day"]}
-                mask={value =>
-                  value ? [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/] : []
-                }
-                validators={['required']}
-                errorMessages={['Data invalida']}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end" className="check">
-                      <DoneIcon className="check-icon" />
-                    </InputAdornment>
-                  )
-                }}
-                animateYearScrolling={false}
-                invalidDateMessage="Data invalida"
-              />
-            </MuiPickersUtilsProvider>
-
-            {/* <TextValidator
+            <TextValidator
               ref="birthDate"
               name="birthDate"
               value={this.state.birthDate}
               className="field"
               label="Data de nascimento"
-              type="date"
-              validators={['required', 'minStringLength:10']}
+              placeholder="dd/mm/aaaa"
+              validators={['required', 'dateValidator']}
               errorMessages={['Data invalida', 'Data invalida']}
               onChange={this.handleChange('birthDate')}
               onBlur={this.handleBlur}
+              InputLabelProps={{
+                shrink: true,
+              }}
               InputProps={{
+                inputComponent: DateFormat,
                 endAdornment: (
                   <InputAdornment position="end" className="check">
                     <DoneIcon className="check-icon" />
                   </InputAdornment>
                 )
               }}
-            /> */}
+            />
           </Grid>
         </Grid>
 

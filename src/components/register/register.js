@@ -28,55 +28,6 @@ class Register extends Component {
 
   state = {
     activeStep: 0,
-
-    user: {
-      ownerData: {
-        name: '',
-        cpf: '',
-        birthDate: new Date(new Date().setFullYear(new Date().getFullYear() - 16)),
-        telphone: '',
-        motherName: ''
-      },
-      ownerAddress: {
-        cep: '',
-        district: '',
-        street: '',
-        number: '',
-        complement: '',
-        city: '',
-        state: ''
-      },
-      employeData: {
-        cnpj: '',
-        employeCreateDate: new Date().toISOString().split('T')[0],
-        fantasyName: '',
-        socialName: '',
-        segment: ''
-      },
-      employeAddress: {
-        cep: '',
-        district: '',
-        street: '',
-        number: '',
-        complement: '',
-        city: '',
-        state: ''
-      },
-      deliveryAddress: {
-        cep: '',
-        district: '',
-        street: '',
-        number: '',
-        complement: '',
-        city: '',
-        state: ''
-      },
-      accountData: {
-        email: '',
-        celphone: '',
-        password: ''
-      }
-    }
   }
 
   componentWillMount() {
@@ -122,13 +73,13 @@ class Register extends Component {
             <Grid container spacing={0} className="form" justify="center">
               <Grid item xs={6}>
                 <Switch>
-                  <Route exact path='/abrir-conta/responsavel-conta' render={() => <OwnerData user={this.state.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
-                  <Route exact path='/abrir-conta/endereco-responsavel' render={() => <OwnerAddress user={this.state.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
-                  <Route exact path='/abrir-conta/dados-empresa' render={() => <EmployeData user={this.state.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
-                  <Route exact path='/abrir-conta/endereco-empresa' render={() => <EmployeAddress user={this.state.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
-                  <Route exact path='/abrir-conta/endereco-correspondencia' render={() => <DeliveryAddress user={this.state.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
-                  <Route exact path='/abrir-conta/dados-acesso' render={() => <AccountData user={this.state.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
-                  <Route exact path='/abrir-conta/confirmar-dados' render={() => <ConfirmationData user={this.state.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                  <Route exact path='/abrir-conta/responsavel-conta' render={() => <OwnerData user={this.props.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                  <Route exact path='/abrir-conta/endereco-responsavel' render={() => <OwnerAddress user={this.props.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                  <Route exact path='/abrir-conta/dados-empresa' render={() => <EmployeData user={this.props.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                  <Route exact path='/abrir-conta/endereco-empresa' render={() => <EmployeAddress user={this.props.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                  <Route exact path='/abrir-conta/endereco-correspondencia' render={() => <DeliveryAddress user={this.props.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                  <Route exact path='/abrir-conta/dados-acesso' render={() => <AccountData user={this.props.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                  <Route exact path='/abrir-conta/confirmar-dados' render={() => <ConfirmationData user={this.props.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
                   <Route exact path='/abrir-conta/concluindo' render={() => <EmployeData onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
                 </Switch>
               </Grid>

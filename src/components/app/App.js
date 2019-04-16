@@ -6,6 +6,7 @@ import Header from '../header/header'
 import { Switch, Route, withRouter } from 'react-router-dom'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 import Register from '../register/register';
+import Welcome from '../welcome/welcome';
 
 const theme = createMuiTheme({
   typography: {
@@ -25,7 +26,7 @@ class App extends Component {
       ownerData: {
         name: '',
         cpf: '',
-        birthDate: new Date(new Date().setFullYear(new Date().getFullYear() - 16)),
+        birthDate: '',
         telphone: '',
         motherName: ''
       },
@@ -78,7 +79,7 @@ class App extends Component {
           <Header />
           <main>
             <Switch>
-              {/* <Route exact path='/' render={() => <OwnerData user={this.state.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} /> */}
+              <Route exact path='/abrir-conta' render={() => <Welcome user={this.state.user}/>} />
               <Route exact path='/abrir-conta/:step' render={() => <Register user={this.state.user} />} />
               {/* <Route exact path='/sucesso' render={() => <EmployeData user={this.state.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} /> */}
             </Switch>

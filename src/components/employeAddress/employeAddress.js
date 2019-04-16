@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import '../../assets/styles/_fonts.scss';
 import '../../assets/styles/_form.scss';
 import '../../assets/styles/employeAddress.scss';
-import { Grid, InputAdornment, MenuItem } from '@material-ui/core';
+import { Grid, InputAdornment, MenuItem, RadioGroup, Radio, FormControlLabel } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 import NumberFormat from 'react-number-format';
 import { ValidatorForm, TextValidator, SelectValidator } from 'react-material-ui-form-validator';
 import DoneIcon from '@material-ui/icons/Done'
@@ -26,9 +27,20 @@ function CepFormat(props) {
   );
 }
 
+const styles = theme => ({
+  radio: {
+    '&$checked': {
+      color: '#7BE115'
+    }
+  },
+  checked: {}
+})
+
 class EmployeAddress extends Component {
 
   state = {
+    sameAddress: 'none',
+    sameAddressError: false,
     cep: this.props.user.employeAddress.cep,
     district: this.props.user.employeAddress.district,
     street: this.props.user.employeAddress.street,
@@ -36,19 +48,60 @@ class EmployeAddress extends Component {
     complement: this.props.user.employeAddress.complement,
     city: this.props.user.employeAddress.city,
     state: this.props.user.employeAddress.state,
+    cepDisabled: true,
+    districtDisabled: true,
+    streetDisabled: true,
+    numberDisabled: true,
+    complementDisabled: true,
+    cityDisabled: true,
+    stateDisabled: true
   }
 
   componentDidMount() {
     this.props.onRef(this);
-    const cnpjValidator = require('../../utils/CnpjValidator').CnpjValidator;
-    ValidatorForm.addValidationRule('cnpjValidator', value => {
-      return cnpjValidator(value);
-    });
   }
 
   handleChange = prop => event => {
     this.setState({ [prop]: event.target.value });
   };
+
+  enableAllFields = () => {
+    this.setState({
+      cepDisabled: false,
+      districtDisabled: false,
+      streetDisabled: false,
+      numberDisabled: false,
+      complementDisabled: false,
+      cityDisabled: false,
+      stateDisabled: false
+    })
+  }
+
+  disableAllFields = () => {
+    this.setState({
+      cepDisabled: true,
+      districtDisabled: true,
+      streetDisabled: true,
+      numberDisabled: true,
+      complementDisabled: true,
+      cityDisabled: true,
+      stateDisabled: true
+    })
+  }
+
+  bundlerRadioSameAddress = event => {
+    if (event.target.value === 'no') {
+      this.enableAllFields();
+    } else {
+      this.disableAllFields();
+      this.refs.form.resetValidations();
+    }
+
+    this.setState({
+      sameAddress: event.target.value,
+      sameAddressError: false
+    });
+  }
 
   handleBlur = event => {
     let textValidator = this.refs[event.target.name];
@@ -56,7 +109,27 @@ class EmployeAddress extends Component {
   }
 
   submit = () => {
-    this.refs.form.submit();
+    if (this.state.sameAddress === 'none') {
+      this.setState({
+        sameAddressError: true
+      })
+    } else if (this.state.sameAddress === 'no'){
+      this.refs.form.submit();
+    } else {
+      this.handleSameAddressSubmit();
+    }
+  }
+
+  handleSameAddressSubmit = () => {
+    this.props.user.employeAddress.cep = this.props.user.ownerAddress.cep;
+    this.props.user.employeAddress.district = this.props.user.ownerAddress.district;
+    this.props.user.employeAddress.street = this.props.user.ownerAddress.street;
+    this.props.user.employeAddress.number = this.props.user.ownerAddress.number;
+    this.props.user.employeAddress.complement = this.props.user.ownerAddress.complement;
+    this.props.user.employeAddress.city = this.props.user.ownerAddress.city;
+    this.props.user.employeAddress.state = this.props.user.ownerAddress.state;
+
+    this.props.goToNextForm();
   }
 
   handleSubmit = () => {
@@ -73,10 +146,28 @@ class EmployeAddress extends Component {
 
   render() {
     const states = require('../../utils/States').getStates();
+    const { classes } = this.props;
     return (
-    <div className="employe-data">
+    <div className="employe-address">
 
       <h2 className="title">Endereço&nbsp;<b>da empresa</b><span className="endpoint"></span></h2>
+
+      <p className="same-location-label">O endereço da empresa é o mesmo endereço do responsável da conta?</p>
+
+      <RadioGroup
+        className="radio-group"
+        row
+        name="sameAddress"
+        value={this.state.sameAddress}
+        onChange={this.bundlerRadioSameAddress}
+      >
+        <FormControlLabel className="control-label" value="yes" control={<Radio className="radio" classes={{root: classes.radio, checked: classes.checked}} />} label="Sim" />
+        <FormControlLabel className="control-label" value="no" control={<Radio className="radio" classes={{root: classes.radio, checked: classes.checked}} />} label="Não" />
+      </RadioGroup>
+
+      {this.state.sameAddressError &&
+        <span className="field-error">Selecione uma opção</span>
+      }
 
       <ValidatorForm
         ref="form"
@@ -87,6 +178,7 @@ class EmployeAddress extends Component {
         <Grid container spacing={24}>
           <Grid item xs={6}>
             <TextValidator
+              disabled={this.state.cepDisabled}
               ref="cep"
               name="cep"
               value={this.state.cep}
@@ -108,6 +200,7 @@ class EmployeAddress extends Component {
           </Grid>
           <Grid item xs={6}>
             <TextValidator
+              disabled={this.state.districtDisabled}
               ref="district"
               name="district"
               value={this.state.district}
@@ -129,6 +222,7 @@ class EmployeAddress extends Component {
         </Grid>
 
         <TextValidator
+          disabled={this.state.streetDisabled}
           ref="street"
           name="street"
           value={this.state.street}
@@ -150,6 +244,7 @@ class EmployeAddress extends Component {
         <Grid container spacing={24}>
           <Grid item xs={6}>
             <TextValidator
+              disabled={this.state.numberDisabled}
               ref="number"
               name="number"
               value={this.state.number}
@@ -170,6 +265,7 @@ class EmployeAddress extends Component {
           </Grid>
           <Grid item xs={6}>
             <TextValidator
+              disabled={this.state.complementDisabled}
               ref="complement"
               name="complement"
               value={this.state.complement}
@@ -193,6 +289,7 @@ class EmployeAddress extends Component {
         <Grid container spacing={24}>
           <Grid item xs={6}>
             <TextValidator
+              disabled={this.state.cityDisabled}
               ref="city"
               name="city"
               value={this.state.city}
@@ -213,6 +310,7 @@ class EmployeAddress extends Component {
           </Grid>
           <Grid item xs={6}>
             <SelectValidator
+              disabled={this.state.stateDisabled}
               ref="state"
               name="state"
               value={this.state.state}
@@ -245,4 +343,4 @@ class EmployeAddress extends Component {
   }
 }
 
-export default EmployeAddress;
+export default withStyles(styles)(EmployeAddress);
