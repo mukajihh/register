@@ -41,9 +41,11 @@ class App extends Component {
       },
       employeData: {
         cnpj: '',
-        employeCreateDate: new Date().toISOString().split('T')[0],
+        employeCreateDate: '',
         fantasyName: '',
         socialName: '',
+        stateInscription: '',
+        constitutionalForm: '',
         segment: ''
       },
       employeAddress: {

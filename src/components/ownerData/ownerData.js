@@ -5,11 +5,7 @@ import '../../assets/styles/ownerData.scss';
 import { Grid, InputAdornment } from '@material-ui/core';
 import NumberFormat from 'react-number-format';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import ValidatedDatePicker from '../../utils/validatedDatePicker';
 import DoneIcon from '@material-ui/icons/Done';
-import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
-import MomentUtils from "@date-io/moment";
-import moment from "moment";
 import "moment/locale/pt-br";
 
 function CpfFormat(props) {

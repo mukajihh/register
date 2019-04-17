@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import '../../assets/styles/_fonts.scss';
 import '../../assets/styles/_form.scss';
 import '../../assets/styles/employeData.scss';
-import { Grid, InputAdornment } from '@material-ui/core';
+import { Grid, InputAdornment, MenuItem } from '@material-ui/core';
 import NumberFormat from 'react-number-format';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import { ValidatorForm, TextValidator, SelectValidator } from 'react-material-ui-form-validator';
 import DoneIcon from '@material-ui/icons/Done'
 
 function CnpjFormat(props) {
@@ -26,6 +26,55 @@ function CnpjFormat(props) {
   );
 }
 
+function stateInscription(val) {
+  let part1 = val.substring(0, 3);
+  let part2 = val.substring(3, 6);
+  let part3 = val.substring(6, 9);
+  let digit = val.substring(9, 10);
+
+  val = part1 + '.' + part2 + '.' + part3 + '-' + digit;
+
+  return val;
+}
+
+function stateInscriptionFormat(props) {
+  const { inputRef, onChange, ...other } = props;
+
+  return (
+    <NumberFormat
+      {...other}
+      getInputRef={inputRef}
+      onValueChange={values => {
+        onChange({
+          target: {
+            value: values.value,
+          },
+        });
+      }}
+      format={stateInscription}
+    />
+  );
+}
+
+function DateFormat(props) {
+  const { inputRef, onChange, ...other } = props;
+
+  return (
+    <NumberFormat
+      {...other}
+      getInputRef={inputRef}
+      onValueChange={values => {
+        onChange({
+          target: {
+            value: values.value,
+          },
+        });
+      }}
+      format="##/##/####"
+    />
+  );
+}
+
 class EmployeData extends Component {
 
   state = {
@@ -33,6 +82,8 @@ class EmployeData extends Component {
     employeCreateDate: this.props.user.employeData.employeCreateDate,
     fantasyName: this.props.user.employeData.fantasyName,
     socialName: this.props.user.employeData.socialName,
+    stateInscription: this.props.user.employeData.stateInscription,
+    constitutionalForm: this.props.user.employeData.constitutionalForm,
     segment: this.props.user.employeData.segment
   }
 
@@ -41,6 +92,37 @@ class EmployeData extends Component {
     const cnpjValidator = require('../../utils/CnpjValidator').CnpjValidator;
     ValidatorForm.addValidationRule('cnpjValidator', value => {
       return cnpjValidator(value);
+    });
+    const dateValidator = require('../../utils/dateValidator').DateValidator;
+    ValidatorForm.addValidationRule('dateValidator', value => {
+      if (dateValidator(value)) {
+        var parts = value.split("/");
+        var birthDate = new Date(parts[2], parts[1] - 1, parts[0])
+        
+        if (isNaN(birthDate.getFullYear())) {          
+          return false;
+        }
+        
+        if (birthDate.getFullYear() < 1900) {
+          return false;
+        }
+
+        let today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        let m = today.getMonth() - birthDate.getMonth();
+
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        if (age < 16) {
+          return false;
+        }
+
+      } else {
+        return false;
+      }
+
+      return true;
     });
   }
 
@@ -62,12 +144,36 @@ class EmployeData extends Component {
     this.props.user.employeData.employeCreateDate = this.state.employeCreateDate;
     this.props.user.employeData.fantasyName = this.state.fantasyName;
     this.props.user.employeData.socialName = this.state.socialName;
+    this.props.user.employeData.stateInscription = this.state.stateInscription;
+    this.props.user.employeData.constitutionalForm = this.state.constitutionalForm;
     this.props.user.employeData.segment = this.state.segment;
 
     this.props.goToNextForm();
   }
 
   render() {
+    var constitutionForms = [
+      {
+        value: 'LTDA',
+        label: 'LTDA'
+      },
+      {
+        value: 'S/A',
+        label: 'S/A'
+      },
+      {
+        value: 'MEI',
+        label: 'MEI'
+      },
+      {
+        value: 'EIRELI',
+        label: 'EIRELI'
+      },
+      {
+        value: 'Individual',
+        label: 'Individual'
+      },
+    ]
     return (
     <div className="employe-data">
 
@@ -108,12 +214,16 @@ class EmployeData extends Component {
               value={this.state.employeCreateDate}
               className="field"
               label="Data de abertura da empresa"
-              validators={['required']}
-              type="date"
-              errorMessages={['Digite um data', 'Data invalida!']}
+              placeholder="dd/mm/aaaa"
+              validators={['required', 'dateValidator']}
+              errorMessages={['Data invalida', 'Data invalida']}
               onChange={this.handleChange('employeCreateDate')}
               onBlur={this.handleBlur}
+              InputLabelProps={{
+                shrink: true,
+              }}
               InputProps={{
+                inputComponent: DateFormat,
                 endAdornment: (
                   <InputAdornment position="end" className="check">
                     <DoneIcon className="check-icon" />
@@ -162,7 +272,58 @@ class EmployeData extends Component {
           }}
         />
 
-        <TextValidator
+        <Grid container spacing={24}>
+          <Grid item xs={6}>
+            <TextValidator
+              ref="stateInscription"
+              name="stateInscription"
+              value={this.state.stateInscription}
+              className="field"
+              label="Inscrição estadual"
+              validators={['required', 'minStringLength:13']}
+              errorMessages={['Digite a inscrição estadual', 'Inscrição estadual invalida']}
+              onChange={this.handleChange('stateInscription')}
+              onBlur={this.handleBlur}
+              InputProps={{
+                inputComponent: stateInscriptionFormat,
+                endAdornment: (
+                  <InputAdornment position="end" className="check">
+                    <DoneIcon className="check-icon" />
+                  </InputAdornment>
+                )
+              }}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <SelectValidator
+              ref="constitutionalForm"
+              name="constitutionalForm"
+              value={this.state.constitutionalForm}
+              className="field"
+              label="Forma de constituição"
+              validators={['required']}
+              errorMessages={['Selecione uma forma de constituição']}
+              onChange={this.handleChange('constitutionalForm')}
+              onBlur={this.handleBlur}
+              InputLabelProps={{ shrink: true }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end" className="check">
+                    <DoneIcon className="check-icon" />
+                  </InputAdornment>
+                )
+              }}
+              >
+              {constitutionForms.map(option => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </SelectValidator>
+          </Grid>
+        </Grid>
+
+        <SelectValidator
           ref="segment"
           name="segment"
           value={this.state.segment}
@@ -179,7 +340,14 @@ class EmployeData extends Component {
               </InputAdornment>
             )
           }}
-        />
+          >
+          {constitutionForms.map(option => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </SelectValidator>
+
       </ValidatorForm>
     </div>
     );

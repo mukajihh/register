@@ -11,14 +11,14 @@ var DateValidator = dateString => {
   var year = parseInt(parts[2], 10);
   
   // Check the ranges of month and year
-  if (year < 1000 || year > 3000 || month == 0 || month > 12) {
+  if (year < 1000 || year > 3000 || month === 0 || month > 12) {
     return false;
   }
 
   var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
 
   // Adjust for leap years
-  if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0)) {
+  if (year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0)) {
     monthLength[1] = 29;
   }
 
