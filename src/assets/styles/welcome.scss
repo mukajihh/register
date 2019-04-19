@@ -1,13 +1,70 @@
-.App {
-  height: 100vh;
+.welcome {
 
-  main {
-    max-width: 1080px;
-    margin: 0 auto;
-    height: calc(100% - 99px);
-
-    > div {
-      height: 100%;
+  .side-image {
+    position: relative;
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      min-height: 100%;
+      height: calc(100vh - 99px);
+      width: 50vw;
+      right: 0;
+      background: url('../images/welcome.jpg') no-repeat;
+      background-position: 40% center;
+      background-size: auto 150%;
     }
   }
+
+  .welcome-content {
+    margin: 100px 0 0 0;
+
+    h2.title {
+      display: block;
+      font-size: 40px;
+      max-width: 400px;
+      margin-bottom: 25px;
+  
+      &:first-child {
+        margin-bottom: 0;
+        max-width: none;
+      }
+    }
+  
+    .subtitle {
+      font-family: 'helvetica-neue';
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 25px;
+    }
+
+    .list-title {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 300;
+      font-size: 12px;
+    }
+
+    .list {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 300;
+      font-size: 12px;
+
+      .list-item {
+        margin-top: 10px;
+        
+
+        &::before {
+          content: '';
+          display: inline-block;
+          position: relative;
+          height: 5px;
+          width: 5px;
+          background: #707070;
+          margin: 0 10px 2px 0;
+        }
+      }
+    }
+  }
+
+  .form .button { margin: 40px 0 }
 }

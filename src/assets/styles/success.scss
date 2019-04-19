@@ -1,0 +1,111 @@
+.success {
+
+  .side-image {
+    position: relative;
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      min-height: 100%;
+      height: calc(100vh - 99px);
+      width: 50vw;
+      right: 0;
+      background: url('../images/success.jpg') no-repeat;
+      background-position: right -70px center;
+      background-size: auto 150%;
+    }
+  }
+
+  .success-content {
+    margin: 100px 0 0 0;
+
+    h2.title {
+      display: block;
+      max-width: none;
+      margin-bottom: 15px;
+    }
+  
+    .subtitle {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      margin-bottom: 25px;
+      line-height: 22px;
+
+      b {
+        font-weight: 600;
+      }
+
+      &:last-child { max-width: 400px }
+    }
+
+    .app {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 25px;
+      line-height: 22px;
+    }
+
+    .list-title {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 300;
+      font-size: 12px;
+    }
+
+    .list {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 300;
+      font-size: 12px;
+
+      .list-item {
+        margin-top: 10px;
+        
+
+        &::before {
+          content: '';
+          display: inline-block;
+          position: relative;
+          height: 5px;
+          width: 5px;
+          background: #707070;
+          margin: 0 10px 2px 0;
+        }
+      }
+    }
+  }
+
+  .form .button { margin: 40px 0 }
+
+  .ilustrations {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+
+    .cellphone::before {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      display: block;
+      background: url('../images/cellphone.png') no-repeat;
+      background-position: -10px 115px;
+      height: 560px;
+      width: 475px;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      right: 340px;
+      bottom: 5px;
+      display: block;
+      background: url('../images/card.png') no-repeat;
+      background-position: center center;
+      height: 320px;
+      width: 280px;
+    }
+  }
+}

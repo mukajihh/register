@@ -7,6 +7,7 @@ import { Switch, Route, withRouter } from 'react-router-dom'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 import Register from '../register/register';
 import Welcome from '../welcome/welcome';
+import Success from '../success/success';
 
 const theme = createMuiTheme({
   typography: {
@@ -82,8 +83,8 @@ class App extends Component {
           <main>
             <Switch>
               <Route exact path='/abrir-conta' render={() => <Welcome user={this.state.user}/>} />
+              <Route exact path='/abrir-conta/sucesso' render={() => <Success user={this.state.user}/>} />
               <Route exact path='/abrir-conta/:step' render={() => <Register user={this.state.user} />} />
-              {/* <Route exact path='/sucesso' render={() => <EmployeData user={this.state.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} /> */}
             </Switch>
           </main>
         </div>
