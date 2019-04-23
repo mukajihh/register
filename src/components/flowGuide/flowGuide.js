@@ -1,7 +1,29 @@
 import React, { Component } from 'react';
 import '../../assets/styles/_fonts.scss';
 import '../../assets/styles/flowGuide.scss';
-import { Stepper, Step, StepLabel, StepContent } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import { Stepper, Step, StepLabel, StepContent, StepConnector } from '@material-ui/core';
+
+const styles = theme => ({
+  connectorRoot: {
+    padding: '0px',
+    marginLeft: '6px'
+  },
+  connectorCompleted: {
+    '& $connectorLine': {
+      borderColor: '#7BDB18',
+    }
+  },
+  connectorDisabled: {
+    '& $connectorLine': {
+      borderColor: '#D1D1D1',
+    },
+  },
+  connectorLine: {
+    height: '35px',
+    transition: theme.transitions.create('border-color'),
+  }
+});
 
 class FlowGuide extends Component {
 
@@ -10,6 +32,18 @@ class FlowGuide extends Component {
   }
 
   render() {
+    const { classes } = this.props;
+    const connector = (
+      <StepConnector
+        classes={{
+          root: classes.connectorRoot,
+          active: 'active',
+          completed: classes.connectorCompleted,
+          disabled: classes.connectorDisabled,
+          line: classes.connectorLine,
+        }}
+      />
+    );
     return (
       <div className="flow-guide-content">
         <h2 className="subtitle">Tenha em mãos:</h2>
@@ -18,6 +52,7 @@ class FlowGuide extends Component {
         <Stepper
           activeStep={this.props.activeStep}
           orientation="vertical"
+          connector={connector}
           className="flow-guide-stepper"
         >
           <Step
@@ -87,4 +122,4 @@ class FlowGuide extends Component {
   }
 }
 
-export default FlowGuide;
+export default withStyles(styles)(FlowGuide);

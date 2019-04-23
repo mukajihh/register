@@ -1,111 +1,111 @@
 var getStates = () =>{
   return [
     {
-      value: 'Acre',
+      value: 'AC',
       label: 'AC'
     },
     {
-      value: 'Alagoas',
+      value: 'AL',
       label: 'AL'
     },
     {
-      value: 'Amapá',
+      value: 'AP',
       label: 'AP'
     },
     {
-      value: 'Amazonas',
+      value: 'AM',
       label: 'AM'
     },
     {
-      value: 'Bahia',
+      value: 'BA',
       label: 'BA'
     },
     {
-      value: 'Ceará',
+      value: 'CE',
       label: 'CE'
     },
     {
-      value: 'Distrito Federal',
+      value: 'DF',
       label: 'DF'
     },
     {
-      value: 'Espírito Santo',
+      value: 'ES',
       label: 'ES'
     },
     {
-      value: 'Goiás',
+      value: 'GO',
       label: 'GO'
     },
     {
-      value: 'Maranhão',
+      value: 'MA',
       label: 'MA'
     },
     {
-      value: 'Mato Grosso',
+      value: 'MT',
       label: 'MT'
     },
     {
-      value: 'Mato Grosso do Sul',
+      value: 'MS',
       label: 'MS'
     },
     {
-      value: 'Minas Gerais',
+      value: 'MG',
       label: 'MG'
     },
     {
-      value: 'Pará',
+      value: 'PA',
       label: 'PA'
     },
     {
-      value: 'Paraíba',
+      value: 'PB',
       label: 'PB'
     },
     {
-      value: 'Paraná',
+      value: 'PR',
       label: 'PR'
     },
     {
-      value: 'Pernambuco',
+      value: 'PE',
       label: 'PE'
     },
     {
-      value: 'Piauí',
+      value: 'PI',
       label: 'PI'
     },
     {
-      value: 'Rio de Janeiro',
+      value: 'RJ',
       label: 'RJ'
     },
     {
-      value: 'Rio Grande do Norte',
+      value: 'RN',
       label: 'RN'
     },
     {
-      value: 'Rio Grande do Sul',
+      value: 'RS',
       label: 'RS'
     },
     {
-      value: 'Rondônia',
+      value: 'RO',
       label: 'RO'
     },
     {
-      value: 'Roraima',
+      value: 'RR',
       label: 'RR'
     },
     {
-      value: 'Santa Catarina',
+      value: 'SC',
       label: 'SC'
     },
     {
-      value: 'São Paulo',
+      value: 'SP',
       label: 'SP'
     },
     {
-      value: 'Sergipe',
+      value: 'SE',
       label: 'SE'
     },
     {
-      value: 'Tocantins',
+      value: 'TO',
       label: 'TO'
     }
   ];

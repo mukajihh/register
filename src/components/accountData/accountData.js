@@ -64,70 +64,33 @@ class AccountData extends Component {
 
   render() {
     return (
-    <div className="account-data">
+      <Grid item xs={6}>
+        <div className="account-data">
 
-      <h2 className="title">Dados de&nbsp;<b>acesso à conta</b><span className="endpoint"></span></h2>
+          <h2 className="title">Dados de&nbsp;<b>acesso à conta</b><span className="endpoint"></span></h2>
 
-      <ValidatorForm
-        ref="form"
-        noValidate
-        onSubmit={this.handleSubmit}
-        instantValidate={false}
-      >
-      
-        <TextValidator
-          ref="email"
-          name="email"
-          value={this.state.email}
-          className="field"
-          label="E-mail (Este será o seu login)"
-          validators={['required', 'isEmail']}
-          errorMessages={['Digite o E-mail!', 'E-mail invalido']}
-          onChange={this.handleChange('email')}
-          onBlur={this.handleBlur}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end" className="check">
-                <DoneIcon className="check-icon" />
-              </InputAdornment>
-            )
-          }}
-        />
-
-        <TextValidator
-          ref="celphone"
-          name="celphone"
-          value={this.state.celphone}
-          className="field"
-          label="Número de celular"
-          validators={['required']}
-          errorMessages={['Digite o E-mail!']}
-          onChange={this.handleChange('celphone')}
-          onBlur={this.handleBlur}
-          InputProps={{
-            inputComponent: TelFormat,
-            endAdornment: (
-              <InputAdornment position="end" className="check">
-                <DoneIcon className="check-icon" />
-              </InputAdornment>
-            )
-          }}
-        />
-
-        <Grid container spacing={24}>
-          <Grid item xs={6}>
+          <ValidatorForm
+            ref="form"
+            noValidate
+            onSubmit={this.handleSubmit}
+            instantValidate={false}
+          >
+          
             <TextValidator
-              ref="password"
-              name="password"
-              value={this.state.password}
+              ref="email"
+              name="email"
+              value={this.state.email}
               className="field"
-              label="Nova senha"
-              validators={['required']}
-              errorMessages={['Digite uma senha']}
-              onChange={this.handleChange('password')}
+              label="E-mail (Este será o seu login)"
+              validators={['required', 'isEmail']}
+              errorMessages={['Digite o E-mail!', 'E-mail invalido']}
+              onChange={this.handleChange('email')}
               onBlur={this.handleBlur}
-              type="password"
+              InputLabelProps={{
+                classes: { error: 'error', shrink: 'shrink' }
+              }}
               InputProps={{
+                classes: { error: 'error' },
                 endAdornment: (
                   <InputAdornment position="end" className="check">
                     <DoneIcon className="check-icon" />
@@ -135,20 +98,23 @@ class AccountData extends Component {
                 )
               }}
             />
-          </Grid>
-          <Grid item xs={6}>
-          <TextValidator
-              ref="confirmPassword"
-              name="confirmPassword"
-              value={this.state.confirmPassword}
+
+            <TextValidator
+              ref="celphone"
+              name="celphone"
+              value={this.state.celphone}
               className="field"
-              label="Confirmar senha"
+              label="Número de celular"
               validators={['required']}
-              errorMessages={['Digite uma senha']}
-              onChange={this.handleChange('confirmPassword')}
+              errorMessages={['Digite o E-mail!']}
+              onChange={this.handleChange('celphone')}
               onBlur={this.handleBlur}
-              type="password"
+              InputLabelProps={{
+                classes: { error: 'error', shrink: 'shrink' }
+              }}
               InputProps={{
+                inputComponent: TelFormat,
+                classes: { error: 'error' },
                 endAdornment: (
                   <InputAdornment position="end" className="check">
                     <DoneIcon className="check-icon" />
@@ -156,10 +122,62 @@ class AccountData extends Component {
                 )
               }}
             />
-          </Grid>
-        </Grid>
-      </ValidatorForm>
-    </div>
+
+            <Grid container spacing={24}>
+              <Grid item xs={6}>
+                <TextValidator
+                  ref="password"
+                  name="password"
+                  value={this.state.password}
+                  className="field"
+                  label="Nova senha"
+                  validators={['required']}
+                  errorMessages={['Digite uma senha']}
+                  onChange={this.handleChange('password')}
+                  onBlur={this.handleBlur}
+                  type="password"
+                  InputLabelProps={{
+                    classes: { error: 'error', shrink: 'shrink' }
+                  }}
+                  InputProps={{
+                    classes: { error: 'error' },
+                    endAdornment: (
+                      <InputAdornment position="end" className="check">
+                        <DoneIcon className="check-icon" />
+                      </InputAdornment>
+                    )
+                  }}
+                />
+              </Grid>
+              <Grid item xs={6}>
+              <TextValidator
+                  ref="confirmPassword"
+                  name="confirmPassword"
+                  value={this.state.confirmPassword}
+                  className="field"
+                  label="Confirmar senha"
+                  validators={['required']}
+                  errorMessages={['Digite uma senha']}
+                  onChange={this.handleChange('confirmPassword')}
+                  onBlur={this.handleBlur}
+                  type="password"
+                  InputLabelProps={{
+                    classes: { error: 'error', shrink: 'shrink' }
+                  }}
+                  InputProps={{
+                    classes: { error: 'error' },
+                    endAdornment: (
+                      <InputAdornment position="end" className="check">
+                        <DoneIcon className="check-icon" />
+                      </InputAdornment>
+                    )
+                  }}
+                />
+              </Grid>
+            </Grid>
+          </ValidatorForm>
+        </div>
+      </Grid>
     );
   }
 }

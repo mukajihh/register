@@ -13,15 +13,11 @@
       color: #8B8B8B;
       opacity: 0.7;
 
-      &[class*="223"] {
-        transform: translate(0, 2.5px) scale(0.75);
-      }
-
-      &[class*="219"] {
+      &.error {
         color: #8B8B8B;
       }
 
-      &[class*="231"]:not([class*="219"]) + div .check {
+      &.shrink:not(.error) + div .check {
         display: flex;
       }
     }
@@ -42,7 +38,7 @@
         border-width: 1px;
       }
 
-      &[class*="239"]:after {
+      &.error:after {
         border-color: #f44336;
       }
     }

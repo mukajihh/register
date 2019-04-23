@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../assets/styles/_fonts.scss';
 import '../../assets/styles/_form.scss';
-import '../../assets/styles/App.scss';
+import '../../assets/styles/register.scss';
 import { Switch, Route, withRouter } from 'react-router-dom'
 import { Grid, Fab } from '@material-ui/core';
 import EmployeData from '../employeData/employeData';
@@ -12,6 +12,7 @@ import EmployeAddress from '../employeAddress/employeAddress';
 import DeliveryAddress from '../deliveryAddress/deliveryAddress';
 import OwnerAddress from '../ownerAddress/ownerAddress';
 import ConfirmationData from '../ConfirmationData/confirmationData';
+import Processing from '../processing/processing';
 
 class Register extends Component {
 
@@ -71,46 +72,46 @@ class Register extends Component {
           </Grid>
           <Grid item xs={8} className="form-container">
             <Grid container spacing={0} className="form" justify="center">
-              <Grid item xs={6}>
-                <Switch>
-                  <Route exact path='/abrir-conta/responsavel-conta' render={() => <OwnerData user={this.props.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
-                  <Route exact path='/abrir-conta/endereco-responsavel' render={() => <OwnerAddress user={this.props.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
-                  <Route exact path='/abrir-conta/dados-empresa' render={() => <EmployeData user={this.props.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
-                  <Route exact path='/abrir-conta/endereco-empresa' render={() => <EmployeAddress user={this.props.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
-                  <Route exact path='/abrir-conta/endereco-correspondencia' render={() => <DeliveryAddress user={this.props.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
-                  <Route exact path='/abrir-conta/dados-acesso' render={() => <AccountData user={this.props.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
-                  <Route exact path='/abrir-conta/confirmar-dados' render={() => <ConfirmationData user={this.props.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
-                  <Route exact path='/abrir-conta/concluindo' render={() => <EmployeData onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
-                </Switch>
-              </Grid>
+              <Switch>
+                <Route exact path='/abrir-conta/responsavel-conta' render={() => <OwnerData user={this.props.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                <Route exact path='/abrir-conta/endereco-responsavel' render={() => <OwnerAddress user={this.props.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                <Route exact path='/abrir-conta/dados-empresa' render={() => <EmployeData user={this.props.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                <Route exact path='/abrir-conta/endereco-empresa' render={() => <EmployeAddress user={this.props.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                <Route exact path='/abrir-conta/endereco-correspondencia' render={() => <DeliveryAddress user={this.props.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                <Route exact path='/abrir-conta/dados-acesso' render={() => <AccountData user={this.props.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                <Route exact path='/abrir-conta/confirmar-dados' render={() => <ConfirmationData user={this.props.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+                <Route exact path='/abrir-conta/concluindo' render={() => <Processing user={this.props.user} onRef={ref => (this.child = ref)} goToNextForm={this.goToNextForm} />} />
+              </Switch>
 
-              <Grid item xs={12}>
-                <Grid container spacing={0} justify="center">
-                  <Grid item xs={6}>
-                    <Grid container spacing={24} justify="center">
-                    
-                      <Grid item xs={6}>
-                        <Fab
-                          variant="extended"
-                          className="button"
-                          onClick={this.goToPrevForm}
-                        >
-                          Voltar  
-                        </Fab>
-                      </Grid>
-                      <Grid item xs={6}>
-                        <Fab
-                          variant="extended"
-                          className="button action"
-                          onClick={() => this.child.submit()}
-                        >
-                          Continuar
-                        </Fab>
+              {this.state.activeStep !== 7 &&
+                <Grid item xs={12}>
+                  <Grid container spacing={0} justify="center">
+                    <Grid item xs={6}>
+                      <Grid container spacing={24} justify="center">
+                      
+                        <Grid item xs={6}>
+                          <Fab
+                            variant="extended"
+                            className="button"
+                            onClick={this.goToPrevForm}
+                          >
+                            Voltar  
+                          </Fab>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Fab
+                            variant="extended"
+                            className="button action"
+                            onClick={() => this.child.submit()}
+                          >
+                            Continuar
+                          </Fab>
+                        </Grid>
                       </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
-              </Grid>
+              }
             </Grid>
           </Grid>
         </Grid>

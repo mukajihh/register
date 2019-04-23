@@ -175,117 +175,110 @@ class EmployeData extends Component {
       },
     ]
     return (
-    <div className="employe-data">
+      <Grid item xs={6}>
+        <div className="employe-data">
 
-      <h2 className="title">Dados da&nbsp;<b>pessoa jurídica</b><span className="endpoint"></span></h2>
+          <h2 className="title">Dados da&nbsp;<b>pessoa jurídica</b><span className="endpoint"></span></h2>
 
-      <ValidatorForm
-        ref="form"
-        noValidate
-        onSubmit={this.handleSubmit}
-        instantValidate={false}
-      >
-        <Grid container spacing={24}>
-          <Grid item xs={6}>
+          <ValidatorForm
+            ref="form"
+            noValidate
+            onSubmit={this.handleSubmit}
+            instantValidate={false}
+          >
+            <Grid container spacing={24}>
+              <Grid item xs={6}>
+                <TextValidator
+                  ref="cnpj"
+                  name="cnpj"
+                  value={this.state.cnpj}
+                  className="field"
+                  label="CNPJ"
+                  validators={['required', 'cnpjValidator']}
+                  errorMessages={['Digite um CNPJ', 'CNPJ invalido!']}
+                  onChange={this.handleChange('cnpj')}
+                  onBlur={this.handleBlur}
+                  InputLabelProps={{
+                    classes: { error: 'error', shrink: 'shrink' }
+                  }}
+                  InputProps={{
+                    inputComponent: CnpjFormat,
+                    classes: { error: 'error' },
+                    endAdornment: (
+                      <InputAdornment position="end" className="check">
+                        <DoneIcon className="check-icon" />
+                      </InputAdornment>
+                    )
+                  }}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextValidator
+                  ref="employeCreateDate"
+                  name="employeCreateDate"
+                  value={this.state.employeCreateDate}
+                  className="field"
+                  label="Data de abertura da empresa"
+                  placeholder="dd/mm/aaaa"
+                  validators={['required', 'dateValidator']}
+                  errorMessages={['Data invalida', 'Data invalida']}
+                  onChange={this.handleChange('employeCreateDate')}
+                  onBlur={this.handleBlur}
+                  InputLabelProps={{
+                    shrink: true,
+                    classes: { error: 'error', shrink: 'shrink' }
+                  }}
+                  InputProps={{
+                    inputComponent: DateFormat,
+                    classes: { error: 'error' },
+                    endAdornment: (
+                      <InputAdornment position="end" className="check">
+                        <DoneIcon className="check-icon" />
+                      </InputAdornment>
+                    )
+                  }}
+                />
+              </Grid>
+            </Grid>
+
             <TextValidator
-              ref="cnpj"
-              name="cnpj"
-              value={this.state.cnpj}
+              ref="fantasyName"
+              name="fantasyName"
+              value={this.state.fantasyName}
               className="field"
-              label="CNPJ"
-              validators={['required', 'cnpjValidator']}
-              errorMessages={['Digite um CNPJ', 'CNPJ invalido!']}
-              onChange={this.handleChange('cnpj')}
-              onBlur={this.handleBlur}
-              InputProps={{
-                inputComponent: CnpjFormat,
-                endAdornment: (
-                  <InputAdornment position="end" className="check">
-                    <DoneIcon className="check-icon" />
-                  </InputAdornment>
-                )
-              }}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextValidator
-              ref="employeCreateDate"
-              name="employeCreateDate"
-              value={this.state.employeCreateDate}
-              className="field"
-              label="Data de abertura da empresa"
-              placeholder="dd/mm/aaaa"
-              validators={['required', 'dateValidator']}
-              errorMessages={['Data invalida', 'Data invalida']}
-              onChange={this.handleChange('employeCreateDate')}
+              label="Nome fantasia"
+              validators={['required']}
+              errorMessages={['Digite o nome fantasia!']}
+              onChange={this.handleChange('fantasyName')}
               onBlur={this.handleBlur}
               InputLabelProps={{
-                shrink: true,
+                classes: { error: 'error', shrink: 'shrink' }
               }}
               InputProps={{
-                inputComponent: DateFormat,
-                endAdornment: (
+                  classes: { error: 'error' },
+                  endAdornment: (
                   <InputAdornment position="end" className="check">
                     <DoneIcon className="check-icon" />
                   </InputAdornment>
                 )
               }}
             />
-          </Grid>
-        </Grid>
 
-        <TextValidator
-          ref="fantasyName"
-          name="fantasyName"
-          value={this.state.fantasyName}
-          className="field"
-          label="Nome fantasia"
-          validators={['required']}
-          errorMessages={['Digite o nome fantasia!']}
-          onChange={this.handleChange('fantasyName')}
-          onBlur={this.handleBlur}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end" className="check">
-                <DoneIcon className="check-icon" />
-              </InputAdornment>
-            )
-          }}
-        />
-
-        <TextValidator
-          ref="socialName"
-          name="socialName"
-          value={this.state.socialName}
-          className="field"
-          label="Nome razão social"
-          validators={['required']}
-          errorMessages={['Digite o nome razão social!']}
-          onChange={this.handleChange('socialName')}
-          onBlur={this.handleBlur}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end" className="check">
-                <DoneIcon className="check-icon" />
-              </InputAdornment>
-            )
-          }}
-        />
-
-        <Grid container spacing={24}>
-          <Grid item xs={6}>
             <TextValidator
-              ref="stateInscription"
-              name="stateInscription"
-              value={this.state.stateInscription}
+              ref="socialName"
+              name="socialName"
+              value={this.state.socialName}
               className="field"
-              label="Inscrição estadual"
-              validators={['required', 'minStringLength:13']}
-              errorMessages={['Digite a inscrição estadual', 'Inscrição estadual invalida']}
-              onChange={this.handleChange('stateInscription')}
+              label="Nome razão social"
+              validators={['required']}
+              errorMessages={['Digite o nome razão social!']}
+              onChange={this.handleChange('socialName')}
               onBlur={this.handleBlur}
+              InputLabelProps={{
+                classes: { error: 'error', shrink: 'shrink' }
+              }}
               InputProps={{
-                inputComponent: stateInscriptionFormat,
+                classes: { error: 'error' },
                 endAdornment: (
                   <InputAdornment position="end" className="check">
                     <DoneIcon className="check-icon" />
@@ -293,20 +286,81 @@ class EmployeData extends Component {
                 )
               }}
             />
-          </Grid>
-          <Grid item xs={6}>
+
+            <Grid container spacing={24}>
+              <Grid item xs={6}>
+                <TextValidator
+                  ref="stateInscription"
+                  name="stateInscription"
+                  value={this.state.stateInscription}
+                  className="field"
+                  label="Inscrição estadual"
+                  validators={['required', 'minStringLength:13']}
+                  errorMessages={['Digite a inscrição estadual', 'Inscrição estadual invalida']}
+                  onChange={this.handleChange('stateInscription')}
+                  onBlur={this.handleBlur}
+                  InputLabelProps={{
+                    classes: { error: 'error', shrink: 'shrink' }
+                  }}
+                  InputProps={{
+                    inputComponent: stateInscriptionFormat,
+                    classes: { error: 'error' },
+                    endAdornment: (
+                      <InputAdornment position="end" className="check">
+                        <DoneIcon className="check-icon" />
+                      </InputAdornment>
+                    )
+                  }}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <SelectValidator
+                  ref="constitutionalForm"
+                  name="constitutionalForm"
+                  value={this.state.constitutionalForm}
+                  className="field"
+                  label="Forma de constituição"
+                  validators={['required']}
+                  errorMessages={['Selecione uma forma de constituição']}
+                  onChange={this.handleChange('constitutionalForm')}
+                  onBlur={this.handleBlur}
+                  InputLabelProps={{
+                    shrink: true,
+                    classes: { error: 'error', shrink: 'shrink' }
+                  }}
+                  InputProps={{
+                    classes: { error: 'error' },
+                    endAdornment: (
+                      <InputAdornment position="end" className="check">
+                        <DoneIcon className="check-icon" />
+                      </InputAdornment>
+                    )
+                  }}
+                  >
+                  {constitutionForms.map(option => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </SelectValidator>
+              </Grid>
+            </Grid>
+
             <SelectValidator
-              ref="constitutionalForm"
-              name="constitutionalForm"
-              value={this.state.constitutionalForm}
+              ref="segment"
+              name="segment"
+              value={this.state.segment}
               className="field"
-              label="Forma de constituição"
+              label="Ramo de atividade"
               validators={['required']}
-              errorMessages={['Selecione uma forma de constituição']}
-              onChange={this.handleChange('constitutionalForm')}
+              errorMessages={['Digite o ramo de atividade']}
+              onChange={this.handleChange('segment')}
               onBlur={this.handleBlur}
-              InputLabelProps={{ shrink: true }}
+              InputLabelProps={{
+                classes: { error: 'error', shrink: 'shrink' }
+              }}
               InputProps={{
+                classes: { error: 'error' },
                 endAdornment: (
                   <InputAdornment position="end" className="check">
                     <DoneIcon className="check-icon" />
@@ -320,36 +374,10 @@ class EmployeData extends Component {
                 </MenuItem>
               ))}
             </SelectValidator>
-          </Grid>
-        </Grid>
 
-        <SelectValidator
-          ref="segment"
-          name="segment"
-          value={this.state.segment}
-          className="field"
-          label="Ramo de atividade"
-          validators={['required']}
-          errorMessages={['Digite o ramo de atividade']}
-          onChange={this.handleChange('segment')}
-          onBlur={this.handleBlur}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end" className="check">
-                <DoneIcon className="check-icon" />
-              </InputAdornment>
-            )
-          }}
-          >
-          {constitutionForms.map(option => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </SelectValidator>
-
-      </ValidatorForm>
-    </div>
+          </ValidatorForm>
+        </div>
+      </Grid>
     );
   }
 }

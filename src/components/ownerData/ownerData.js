@@ -177,76 +177,34 @@ class OwnerData extends Component {
 
   render() {
     return (
-    <div className="owner-data">
+      <Grid item xs={6}>
+        <div className="owner-data">
 
-      <h2 className="title">Dados do&nbsp;<b>responsável da conta</b><span className="endpoint"></span></h2>
+          <h2 className="title">Dados do&nbsp;<b>responsável da conta</b><span className="endpoint"></span></h2>
 
-      <ValidatorForm
-        ref="form"
-        noValidate
-        onSubmit={this.handleSubmit}
-        instantValidate={false}
-      >
+          <ValidatorForm
+            ref="form"
+            noValidate
+            onSubmit={this.handleSubmit}
+            instantValidate={false}
+          >
 
-        <TextValidator
-          ref="name"
-          name="name"
-          value={this.state.name}
-          className="field"
-          label="Nome completo"
-          validators={['required', 'maxStringLength:100', 'TwoWordsValidator']}
-          errorMessages={['Nome completo invalido', 'Nome completo invalido', 'Nome completo invalido']}
-          onChange={this.handleChange('name')}
-          onBlur={this.handleBlur}
-          onKeyDown={(event) => this.noNumbersAndSpecialCharacters(event)}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end" className="check">
-                <DoneIcon className="check-icon" />
-              </InputAdornment>
-            )
-          }}
-        />
-
-        <Grid container spacing={24}>
-          <Grid item xs={6}>
             <TextValidator
-              ref="cpf"
-              name="cpf"
-              value={this.state.cpf}
+              ref="name"
+              name="name"
+              value={this.state.name}
               className="field"
-              label="CPF"
-              validators={['cpfValidator', 'required']}
-              errorMessages={['CPF invalido', 'CPF invalido']}
-              onChange={this.handleChange('cpf')}
+              label="Nome completo"
+              validators={['required', 'maxStringLength:100', 'TwoWordsValidator']}
+              errorMessages={['Nome completo invalido', 'Nome completo invalido', 'Nome completo invalido']}
+              onChange={this.handleChange('name')}
               onBlur={this.handleBlur}
-              InputProps={{
-                inputComponent: CpfFormat,
-                endAdornment: (
-                  <InputAdornment position="end" className="check">
-                    <DoneIcon className="check-icon" />
-                  </InputAdornment>
-                )
-              }}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextValidator
-              ref="birthDate"
-              name="birthDate"
-              value={this.state.birthDate}
-              className="field"
-              label="Data de nascimento"
-              placeholder="dd/mm/aaaa"
-              validators={['required', 'dateValidator']}
-              errorMessages={['Data invalida', 'Data invalida']}
-              onChange={this.handleChange('birthDate')}
-              onBlur={this.handleBlur}
+              onKeyDown={(event) => this.noNumbersAndSpecialCharacters(event)}
               InputLabelProps={{
-                shrink: true,
+                classes: { error: 'error', shrink: 'shrink' }
               }}
               InputProps={{
-                inputComponent: DateFormat,
+                classes: { error: 'error' },
                 endAdornment: (
                   <InputAdornment position="end" className="check">
                     <DoneIcon className="check-icon" />
@@ -254,23 +212,106 @@ class OwnerData extends Component {
                 )
               }}
             />
-          </Grid>
-        </Grid>
 
-        <Grid container spacing={24}>
-          <Grid item xs={6}>
+            <Grid container spacing={24}>
+              <Grid item xs={6}>
+                <TextValidator
+                  ref="cpf"
+                  name="cpf"
+                  value={this.state.cpf}
+                  className="field"
+                  label="CPF"
+                  validators={['cpfValidator', 'required']}
+                  errorMessages={['CPF invalido', 'CPF invalido']}
+                  onChange={this.handleChange('cpf')}
+                  onBlur={this.handleBlur}
+                  InputLabelProps={{
+                    classes: { error: 'error', shrink: 'shrink' }
+                  }}
+                  InputProps={{
+                    inputComponent: CpfFormat,
+                    classes: { error: 'error' },
+                    endAdornment: (
+                      <InputAdornment position="end" className="check">
+                        <DoneIcon className="check-icon" />
+                      </InputAdornment>
+                    )
+                  }}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextValidator
+                  ref="birthDate"
+                  name="birthDate"
+                  value={this.state.birthDate}
+                  className="field"
+                  label="Data de nascimento"
+                  placeholder="dd/mm/aaaa"
+                  validators={['required', 'dateValidator']}
+                  errorMessages={['Data invalida', 'Data invalida']}
+                  onChange={this.handleChange('birthDate')}
+                  onBlur={this.handleBlur}
+                  InputLabelProps={{
+                    shrink: true,
+                    classes: { error: 'error', shrink: 'shrink' }
+                  }}
+                  InputProps={{
+                    inputComponent: DateFormat,
+                    classes: { error: 'error' },
+                    endAdornment: (
+                      <InputAdornment position="end" className="check">
+                        <DoneIcon className="check-icon" />
+                      </InputAdornment>
+                    )
+                  }}
+                />
+              </Grid>
+            </Grid>
+
+            <Grid container spacing={24}>
+              <Grid item xs={6}>
+                <TextValidator
+                  ref="telphone"
+                  name="telphone"
+                  value={this.state.telphone}
+                  className="field"
+                  label="Telefone"
+                  validators={['required', 'minStringLength:10']}
+                  errorMessages={['Telefone invalido', 'Telefone invalido']}
+                  onChange={this.handleChange('telphone')}
+                  onBlur={this.handleBlur}
+                  InputLabelProps={{
+                    classes: { error: 'error', shrink: 'shrink' }
+                  }}
+                  InputProps={{
+                    inputComponent: TelFormat,
+                    classes: { error: 'error' },
+                    endAdornment: (
+                      <InputAdornment position="end" className="check">
+                        <DoneIcon className="check-icon" />
+                      </InputAdornment>
+                    )
+                  }}
+                />
+              </Grid>
+            </Grid>
+
             <TextValidator
-              ref="telphone"
-              name="telphone"
-              value={this.state.telphone}
+              ref="motherName"
+              name="motherName"
+              value={this.state.motherName}
               className="field"
-              label="Telefone"
-              validators={['required', 'minStringLength:10']}
-              errorMessages={['Telefone invalido', 'Telefone invalido']}
-              onChange={this.handleChange('telphone')}
+              label="Nome completo da mãe"
+              validators={['required', 'maxStringLength:100', 'TwoWordsValidator']}
+              errorMessages={['Nome da mãe invalido', 'Nome da mãe invalido', 'Nome da mãe invalido']}
+              onChange={this.handleChange('motherName')}
               onBlur={this.handleBlur}
+              onKeyDown={(event) => this.noNumbersAndSpecialCharacters(event)}
+              InputLabelProps={{
+                classes: { error: 'error', shrink: 'shrink' }
+              }}
               InputProps={{
-                inputComponent: TelFormat,
+                classes: { error: 'error' },
                 endAdornment: (
                   <InputAdornment position="end" className="check">
                     <DoneIcon className="check-icon" />
@@ -278,31 +319,10 @@ class OwnerData extends Component {
                 )
               }}
             />
-          </Grid>
-        </Grid>
 
-        <TextValidator
-          ref="motherName"
-          name="motherName"
-          value={this.state.motherName}
-          className="field"
-          label="Nome completo da mãe"
-          validators={['required', 'maxStringLength:100', 'TwoWordsValidator']}
-          errorMessages={['Nome da mãe invalido', 'Nome da mãe invalido', 'Nome da mãe invalido']}
-          onChange={this.handleChange('motherName')}
-          onBlur={this.handleBlur}
-          onKeyDown={(event) => this.noNumbersAndSpecialCharacters(event)}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end" className="check">
-                <DoneIcon className="check-icon" />
-              </InputAdornment>
-            )
-          }}
-        />
-
-      </ValidatorForm>
-    </div>
+          </ValidatorForm>
+        </div>
+      </Grid>
     );
   }
 }
