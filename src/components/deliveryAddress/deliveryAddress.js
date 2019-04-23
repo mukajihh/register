@@ -136,7 +136,24 @@ class DeliveryAddress extends Component {
                 cityDisabled: true,
                 stateDisabled: true
               })
-            }  
+              this.refs.form.resetValidations();
+            }
+          }).catch(error => {
+            this.setState({
+              district: '',
+              street: '',
+              number: '',
+              complement: '',
+              city: '',
+              state: '',
+              districtDisabled: false,
+              streetDisabled: false,
+              numberDisabled: false,
+              complementDisabled: false,
+              cityDisabled: false,
+              stateDisabled: false
+            });
+            this.refs.form.resetValidations();
           })
         } else {
           this.setState({

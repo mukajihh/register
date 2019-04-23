@@ -11,6 +11,23 @@ class Welcome extends Component {
     this.props.history.push('/abrir-conta/responsavel-conta');
   }
 
+  state = {
+    name: ''
+  }
+
+  componentWillMount() {
+    console.log(this.props.match.params.id);
+    fetch('https://1psv428fe2.execute-api.us-east-1.amazonaws.com/dev/banky/v1/prospect/verify/' + this.props.match.params.id, {
+      method: 'post'
+    }).then(response => response.json())
+    .then(response => {
+      this.setState({
+        name: ' ' + response.name.split(' ')[0]
+      })
+      this.props.enableForm();
+    });
+  }
+
   render() {
     return (
       <div className="welcome">
@@ -21,7 +38,7 @@ class Welcome extends Component {
             <Grid container spacing={0} justify="center">
               <Grid item xs={3}></Grid>
               <Grid item xs={9} className="welcome-content">
-                <h2 className="title">Parabéns&nbsp;<b>Murillo!</b></h2>
+                <h2 className="title">Parabéns<b>{this.state.name}!</b></h2>
                 <h2 className="title">Chegou a hora de abrir a sua conta Banky<span className="endpoint"></span></h2>
                 <h2 className="subtitle">Para pagamento de despesas da sua empresa.</h2>
 

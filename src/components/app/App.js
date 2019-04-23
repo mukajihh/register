@@ -4,6 +4,7 @@ import '../../assets/styles/_form.scss';
 import '../../assets/styles/App.scss';
 import Header from '../header/header'
 import { Switch, Route, withRouter } from 'react-router-dom'
+import { PrivateRoute } from '../../utils/PrivateRouter';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 import Register from '../register/register';
 import Welcome from '../welcome/welcome';
@@ -22,6 +23,8 @@ class App extends Component {
 
   state = {
     activeStep: 0,
+
+    enableForm: false,
 
     user: {
       ownerData: {
@@ -75,6 +78,12 @@ class App extends Component {
     }
   }
 
+  enableForm = () => {
+    this.setState({
+      enableForm: true
+    })
+  }
+
   render() {
     return (
       <MuiThemeProvider theme={theme}>
@@ -82,9 +91,9 @@ class App extends Component {
           <Header />
           <main>
             <Switch>
-              <Route exact path='/abrir-conta' render={() => <Welcome user={this.state.user}/>} />
-              <Route exact path='/abrir-conta/sucesso' render={() => <Success user={this.state.user}/>} />
-              <Route exact path='/abrir-conta/:step' render={() => <Register user={this.state.user} />} />
+              <Route exact path='/:id' render={() => <Welcome user={this.state.user} enableForm={this.enableForm}/>} />
+              <PrivateRoute exact redirect={!this.state.enableForm} path='/abrir-conta/sucesso' component={Success} user={this.state.user}/>
+              <PrivateRoute exact redirect={!this.state.enableForm} path='/abrir-conta/:step' component={Register} user={this.state.user}/>
             </Switch>
           </main>
         </div>
