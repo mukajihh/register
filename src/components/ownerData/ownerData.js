@@ -113,8 +113,15 @@ class OwnerData extends Component {
     });
     const dateValidator = require('../../utils/dateValidator').DateValidator;
     ValidatorForm.addValidationRule('dateValidator', value => {
+      var parts = value.split("/");
+
+      if (parts.length === 1) {
+        value = value.substring(0, 2) + '/' + value.substring(2, 4) + '/' + value.substring(4, 8);
+      }
+      
       if (dateValidator(value)) {
-        var parts = value.split("/");
+        parts = value.split("/");
+        
         var birthDate = new Date(parts[2], parts[1] - 1, parts[0])
         
         if (isNaN(birthDate.getFullYear())) {          
@@ -145,11 +152,7 @@ class OwnerData extends Component {
   }
 
   handleChange = prop => event => {
-    if (prop !== 'birthDate') {
-      this.setState({ [prop]: event.target.value });
-    } else {
-      this.setState({ [prop]: event._d });      
-    }
+    this.setState({ [prop]: event.target.value });
   };
 
   handleBlur = event => {
@@ -247,7 +250,7 @@ class OwnerData extends Component {
                   className="field"
                   label="Data de nascimento"
                   placeholder="dd/mm/aaaa"
-                  validators={['required', 'dateValidator']}
+                  validators={['dateValidator', 'required']}
                   errorMessages={['Data invalida', 'Data invalida']}
                   onChange={this.handleChange('birthDate')}
                   onBlur={this.handleBlur}

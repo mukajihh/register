@@ -93,7 +93,8 @@ class App extends Component {
             <Switch>
               <Route exact path='/:id' render={() => <Welcome user={this.state.user} enableForm={this.enableForm}/>} />
               <PrivateRoute exact redirect={!this.state.enableForm} path='/abrir-conta/sucesso' component={Success} user={this.state.user}/>
-              <PrivateRoute exact redirect={!this.state.enableForm} path='/abrir-conta/:step' component={Register} user={this.state.user}/>
+              <Route exact path='/abrir-conta/:step' render={() => <Register user={this.state.user} enableForm={this.enableForm}/>} />
+              {/* <PrivateRoute exact redirect={!this.state.enableForm} path='/abrir-conta/:step' component={Register} user={this.state.user}/> */}
             </Switch>
           </main>
         </div>

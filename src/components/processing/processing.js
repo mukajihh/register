@@ -11,42 +11,42 @@ class Processing extends Component {
   }
 
   componentDidMount() {    
-    fetch('https://cquhs72382.execute-api.us-east-1.amazonaws.com/dev/banky/v1/register', {
+    fetch('https://cquhs72382.execute-api.us-east-1.amazonaws.com/dev/banky/v1/register?sendemail=false', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        companyName: '',
-        tradingName: '',
-        cnpj: '',
-        stateInscription: '',
-        dateOpening: '',
+        companyName: 'Banky TESTE',
+        tradingName: 'Banky TESTE',
+        cnpj: '72.905.221/0001-10',
+        stateInscription: '295.662.824.360',
+        dateOpening: '2005-12-20',
         phones: [{
-          phone: ''
+          phone: '11987654321'
         }],
         address: {
-          zipCode: '',
-          street: '',
-          number: '',
-          complement: '',
-          state: '',
-          city: '',
-          district: ''
+          zipCode: '01001000',
+          street: 'Praça da sé',
+          number: '01',
+          complement: 'central',
+          state: 'SP',
+          city: 'são paulo',
+          district: 'Sé'
         },
         partner: {
-          name: '',
-          cpf: '',
-          birthday:  '',
-          email:  '',
-          password: '',
+          name: 'Nelson Lucas Heitor Moraes',
+          cpf: '22222192803',
+          birthDay:  '1997-07-27',
+          email:  'nnelsonlucasheitormoraes@superig.com.br',
+          password: 'BOdSgwjt7e',
           phones: [{
-            phone: ''
+            phone: '11981097195'
           }]
         }
       })
-    }).then((value) => {
-      console.log(value);
+    }).then(response => response.json()).then((value) => {
+      this.props.history.push('/abrir-conta/sucesso');
     }).catch((reason) => {
       console.log(reason);
     });

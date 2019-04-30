@@ -84,10 +84,20 @@ class EmployeData extends Component {
     socialName: this.props.user.employeData.socialName,
     stateInscription: this.props.user.employeData.stateInscription,
     constitutionalForm: this.props.user.employeData.constitutionalForm,
-    segment: this.props.user.employeData.segment
+    segment: this.props.user.employeData.segment,
+
+    segments: []
   }
 
   componentDidMount() {
+
+    fetch('https://vs1q6btt0g.execute-api.us-east-1.amazonaws.com/dev/banky/v1/domain-tables/cnae').then(response => response.json())
+    .then(response => {
+      this.setState({
+        segments: response.data
+      });
+    });
+
     this.props.onRef(this);
     const cnpjValidator = require('../../utils/CnpjValidator').CnpjValidator;
     ValidatorForm.addValidationRule('cnpjValidator', value => {
@@ -95,8 +105,15 @@ class EmployeData extends Component {
     });
     const dateValidator = require('../../utils/dateValidator').DateValidator;
     ValidatorForm.addValidationRule('dateValidator', value => {
+      var parts = value.split("/");
+
+      if (parts.length === 1) {
+        value = value.substring(0, 2) + '/' + value.substring(2, 4) + '/' + value.substring(4, 8);
+      }
+      
       if (dateValidator(value)) {
-        var parts = value.split("/");
+        parts = value.split("/");
+        
         var birthDate = new Date(parts[2], parts[1] - 1, parts[0])
         
         if (isNaN(birthDate.getFullYear())) {          
@@ -104,17 +121,6 @@ class EmployeData extends Component {
         }
         
         if (birthDate.getFullYear() < 1900) {
-          return false;
-        }
-
-        let today = new Date();
-        let age = today.getFullYear() - birthDate.getFullYear();
-        let m = today.getMonth() - birthDate.getMonth();
-
-        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-            age--;
-        }
-        if (age < 16) {
           return false;
         }
 
@@ -295,7 +301,7 @@ class EmployeData extends Component {
                   value={this.state.stateInscription}
                   className="field"
                   label="Inscrição estadual"
-                  validators={['required', 'minStringLength:13']}
+                  validators={['required', 'minStringLength:9']}
                   errorMessages={['Digite a inscrição estadual', 'Inscrição estadual invalida']}
                   onChange={this.handleChange('stateInscription')}
                   onBlur={this.handleBlur}
@@ -368,9 +374,9 @@ class EmployeData extends Component {
                 )
               }}
               >
-              {constitutionForms.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
+              {this.state.segments.map(option => (
+                <MenuItem key={option.cnae} value={option.cnae}>
+                  {option.cnae}
                 </MenuItem>
               ))}
             </SelectValidator>
