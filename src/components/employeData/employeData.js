@@ -26,36 +26,6 @@ function CnpjFormat(props) {
   );
 }
 
-function stateInscription(val) {
-  let part1 = val.substring(0, 3);
-  let part2 = val.substring(3, 6);
-  let part3 = val.substring(6, 9);
-  let digit = val.substring(9, 10);
-
-  val = part1 + '.' + part2 + '.' + part3 + '-' + digit;
-
-  return val;
-}
-
-function stateInscriptionFormat(props) {
-  const { inputRef, onChange, ...other } = props;
-
-  return (
-    <NumberFormat
-      {...other}
-      getInputRef={inputRef}
-      onValueChange={values => {
-        onChange({
-          target: {
-            value: values.value,
-          },
-        });
-      }}
-      format={stateInscription}
-    />
-  );
-}
-
 function DateFormat(props) {
   const { inputRef, onChange, ...other } = props;
 
@@ -301,15 +271,14 @@ class EmployeData extends Component {
                   value={this.state.stateInscription}
                   className="field"
                   label="Inscrição estadual"
-                  validators={['required', 'minStringLength:9']}
-                  errorMessages={['Digite a inscrição estadual', 'Inscrição estadual invalida']}
+                  validators={['required']}
+                  errorMessages={['Digite a inscrição estadual']}
                   onChange={this.handleChange('stateInscription')}
                   onBlur={this.handleBlur}
                   InputLabelProps={{
                     classes: { error: 'error', shrink: 'shrink' }
                   }}
                   InputProps={{
-                    inputComponent: stateInscriptionFormat,
                     classes: { error: 'error' },
                     endAdornment: (
                       <InputAdornment position="end" className="check">
@@ -375,7 +344,7 @@ class EmployeData extends Component {
               }}
               >
               {this.state.segments.map(option => (
-                <MenuItem key={option.cnae} value={option.cnae}>
+                <MenuItem key={option.class} value={option.class}>
                   {option.cnae}
                 </MenuItem>
               ))}

@@ -10,43 +10,46 @@ class Processing extends Component {
     points: '.'
   }
 
-  componentDidMount() {    
+  componentDidMount() {
+    console.log(this.props);
     fetch('https://cquhs72382.execute-api.us-east-1.amazonaws.com/dev/banky/v1/register?sendemail=false', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        companyName: 'Banky TESTE',
-        tradingName: 'Banky TESTE',
-        cnpj: '72.905.221/0001-10',
-        stateInscription: '295.662.824.360',
+        companyName: this.props.user.employeData.socialName,
+        tradingName: this.props.user.employeData.fantasyName,
+        cnpj: this.props.user.employeData.cnpj,
+        stateInscription: this.props.user.employeData.stateInscription,
         dateOpening: '2005-12-20',
+        cnae: this.props.user.employeData.segment,
+        waysConstitution: this.props.user.employeData.constitutionalForm,
         phones: [{
-          phone: '11987654321'
+          phone: this.props.user.ownerData.telphone
         }],
         address: {
-          zipCode: '01001000',
-          street: 'Praça da sé',
-          number: '01',
-          complement: 'central',
-          state: 'SP',
-          city: 'são paulo',
-          district: 'Sé'
+          zipCode: this.props.user.employeAddress.cep,
+          street: this.props.user.employeAddress.street,
+          number: this.props.user.employeAddress.number,
+          complement: this.props.user.employeAddress.complement,
+          state: this.props.user.employeAddress.state,
+          city: this.props.user.employeAddress.city,
+          district: this.props.user.employeAddress.district
         },
         partner: {
-          name: 'Nelson Lucas Heitor Moraes',
-          cpf: '22222192803',
+          name: this.props.user.ownerData.name,
+          cpf: this.props.user.ownerData.cpf,
           birthDay:  '1997-07-27',
-          email:  'nnelsonlucasheitormoraes@superig.com.br',
-          password: 'BOdSgwjt7e',
+          email:  this.props.user.accountData.email,
+          password: this.props.user.accountData.password,
           phones: [{
-            phone: '11981097195'
+            phone: this.props.user.accountData.celphone
           }]
         }
       })
     }).then(response => response.json()).then((value) => {
-      this.props.history.push('/abrir-conta/sucesso');
+      // this.props.history.push('/abrir-conta/sucesso');
     }).catch((reason) => {
       console.log(reason);
     });

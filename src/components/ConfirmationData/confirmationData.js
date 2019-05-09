@@ -155,7 +155,7 @@ class ConfirmationData extends Component {
             </Grid>
           </Grid>
 
-          <Grid container spacing={24} className="owner-address confirmation-container">
+          <Grid container spacing={24} className="employe-data confirmation-container">
 
             <Grid item xs={12} className="confirmation-section">
               <h5 className="confirmation-section-title">dados da empresa</h5>
@@ -184,15 +184,133 @@ class ConfirmationData extends Component {
               </Grid>
 
               <Grid container spacing={16}>
+                <Grid item xs={6}>
+                  <div className="confirmation-field">
+                    <span className="confirmation-field-value">{this.props.user.employeData.stateInscription}</span>
+                    <span className="confirmation-field-label">Inscrição estadual</span>
+                  </div>
+                </Grid>
+              </Grid>
+
+              <Grid container spacing={16}>
+                <Grid item xs={12}>
+                  <div className="confirmation-field">
+                    <span className="confirmation-field-value">{this.props.user.employeData.socialName}</span>
+                    <span className="confirmation-field-label">Nome Razão Social</span>
+                  </div>
+                </Grid>
+              </Grid>
+
+            </Grid>
+          </Grid>
+
+          <Grid container spacing={24} className="employe-address confirmation-container">
+
+            <Grid item xs={12} className="confirmation-section">
+              <h5 className="confirmation-section-title">Endereço da empresa</h5>
+              <Grid container spacing={16}>
+                <Grid item xs={4}>
+                  <div className="confirmation-field">
+                    <span className="confirmation-field-value">{this.props.user.employeAddress.cep}</span>
+                    <span className="confirmation-field-label">CEP</span>
+                  </div>
+                </Grid>
+                <Grid item xs={4}>
+                  <div className="confirmation-field">
+                    <span className="confirmation-field-value">{this.props.user.employeAddress.number}</span>
+                    <span className="confirmation-field-label">Número</span>
+                  </div>
+                </Grid>
+                <Grid item xs={4}>
+                  <div className="confirmation-field">
+                    <span className="confirmation-field-value">{this.props.user.employeAddress.complement}</span>
+                    <span className="confirmation-field-label">Complemento</span>
+                  </div>
+                </Grid>
+              </Grid>
+
+              <Grid container spacing={16}>
+                <Grid item xs={6}>
+                  <div className="confirmation-field">
+                    <span className="confirmation-field-value">{this.props.user.employeAddress.cep}</span>
+                    <span className="confirmation-field-label">Rua</span>
+                  </div>
+                </Grid>
+                <Grid item xs={6}>
+                  <div className="confirmation-field">
+                    <span className="confirmation-field-value">{this.props.user.employeAddress.number}</span>
+                    <span className="confirmation-field-label">Bairro</span>
+                  </div>
+                </Grid>
+              </Grid>
+
+              <Grid container spacing={16}>
                 <Grid item xs={9}>
                   <div className="confirmation-field">
-                    <span className="confirmation-field-value">{this.props.user.employeData.city}</span>
+                    <span className="confirmation-field-value">{this.props.user.employeAddress.city}</span>
                     <span className="confirmation-field-label">Cidade</span>
                   </div>
                 </Grid>
                 <Grid item xs={3}>
                   <div className="confirmation-field">
-                    <span className="confirmation-field-value">{this.props.user.employeData.state}</span>
+                    <span className="confirmation-field-value">{this.props.user.employeAddress.state}</span>
+                    <span className="confirmation-field-label">Estado</span>
+                  </div>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+
+          <Grid container spacing={24} className="delivery-address confirmation-container">
+
+            <Grid item xs={12} className="confirmation-section">
+              <h5 className="confirmation-section-title">Endereço de correspondencia</h5>
+              <Grid container spacing={16}>
+                <Grid item xs={4}>
+                  <div className="confirmation-field">
+                    <span className="confirmation-field-value">{this.props.user.deliveryAddress.cep}</span>
+                    <span className="confirmation-field-label">CEP</span>
+                  </div>
+                </Grid>
+                <Grid item xs={4}>
+                  <div className="confirmation-field">
+                    <span className="confirmation-field-value">{this.props.user.deliveryAddress.number}</span>
+                    <span className="confirmation-field-label">Número</span>
+                  </div>
+                </Grid>
+                <Grid item xs={4}>
+                  <div className="confirmation-field">
+                    <span className="confirmation-field-value">{this.props.user.deliveryAddress.complement}</span>
+                    <span className="confirmation-field-label">Complemento</span>
+                  </div>
+                </Grid>
+              </Grid>
+
+              <Grid container spacing={16}>
+                <Grid item xs={6}>
+                  <div className="confirmation-field">
+                    <span className="confirmation-field-value">{this.props.user.deliveryAddress.cep}</span>
+                    <span className="confirmation-field-label">Rua</span>
+                  </div>
+                </Grid>
+                <Grid item xs={6}>
+                  <div className="confirmation-field">
+                    <span className="confirmation-field-value">{this.props.user.deliveryAddress.number}</span>
+                    <span className="confirmation-field-label">Bairro</span>
+                  </div>
+                </Grid>
+              </Grid>
+
+              <Grid container spacing={16}>
+                <Grid item xs={9}>
+                  <div className="confirmation-field">
+                    <span className="confirmation-field-value">{this.props.user.deliveryAddress.city}</span>
+                    <span className="confirmation-field-label">Cidade</span>
+                  </div>
+                </Grid>
+                <Grid item xs={3}>
+                  <div className="confirmation-field">
+                    <span className="confirmation-field-value">{this.props.user.deliveryAddress.state}</span>
                     <span className="confirmation-field-label">Estado</span>
                   </div>
                 </Grid>

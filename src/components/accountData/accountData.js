@@ -40,6 +40,14 @@ class AccountData extends Component {
     ValidatorForm.addValidationRule('cpfValidator', value => {
       return cpfValidator(value);
     });
+
+    ValidatorForm.addValidationRule('confirmPassword', value => {
+      if (value === this.state.password) {
+        return true;
+      } else {
+        return false;
+      }
+    });
   }
 
   handleChange = prop => event => {
@@ -48,6 +56,9 @@ class AccountData extends Component {
 
   handleBlur = event => {
     this.refs[event.target.name].validate(event.target.value);
+    if (event.target.name === 'password') {
+      this.refs['confirmPassword'].validate();
+    }
   }
 
   submit = () => {
@@ -55,9 +66,9 @@ class AccountData extends Component {
   }
 
   handleSubmit = () => {
-    this.props.user.deliveryAddress.email = this.state.email;
-    this.props.user.deliveryAddress.celphone = this.state.celphone;
-    this.props.user.deliveryAddress.password = this.state.password;
+    this.props.user.accountData.email = this.state.email;
+    this.props.user.accountData.celphone = this.state.celphone;
+    this.props.user.accountData.password = this.state.password;
 
     this.props.goToNextForm();
   }
@@ -156,8 +167,8 @@ class AccountData extends Component {
                   value={this.state.confirmPassword}
                   className="field"
                   label="Confirmar senha"
-                  validators={['required']}
-                  errorMessages={['Digite uma senha']}
+                  validators={['required', 'confirmPassword']}
+                  errorMessages={['Digite uma senha', 'Senhas diferentes']}
                   onChange={this.handleChange('confirmPassword')}
                   onBlur={this.handleBlur}
                   type="password"

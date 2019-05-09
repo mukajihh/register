@@ -191,25 +191,25 @@ class DeliveryAddress extends Component {
   }
 
   handleSameOwnerAddressSubmit = () => {
-    this.props.user.employeAddress.cep = this.props.user.ownerAddress.cep;
-    this.props.user.employeAddress.district = this.props.user.ownerAddress.district;
-    this.props.user.employeAddress.street = this.props.user.ownerAddress.street;
-    this.props.user.employeAddress.number = this.props.user.ownerAddress.number;
-    this.props.user.employeAddress.complement = this.props.user.ownerAddress.complement;
-    this.props.user.employeAddress.city = this.props.user.ownerAddress.city;
-    this.props.user.employeAddress.state = this.props.user.ownerAddress.state;
+    this.props.user.deliveryAddress.cep = this.props.user.ownerAddress.cep;
+    this.props.user.deliveryAddress.district = this.props.user.ownerAddress.district;
+    this.props.user.deliveryAddress.street = this.props.user.ownerAddress.street;
+    this.props.user.deliveryAddress.number = this.props.user.ownerAddress.number;
+    this.props.user.deliveryAddress.complement = this.props.user.ownerAddress.complement;
+    this.props.user.deliveryAddress.city = this.props.user.ownerAddress.city;
+    this.props.user.deliveryAddress.state = this.props.user.ownerAddress.state;
 
     this.props.goToNextForm();
   }
 
   handleSameEmployeAddressSubmit = () => {
-    this.props.user.employeAddress.cep = this.props.user.employeAddress.cep;
-    this.props.user.employeAddress.district = this.props.user.employeAddress.district;
-    this.props.user.employeAddress.street = this.props.user.employeAddress.street;
-    this.props.user.employeAddress.number = this.props.user.employeAddress.number;
-    this.props.user.employeAddress.complement = this.props.user.employeAddress.complement;
-    this.props.user.employeAddress.city = this.props.user.employeAddress.city;
-    this.props.user.employeAddress.state = this.props.user.employeAddress.state;
+    this.props.user.deliveryAddress.cep = this.props.user.employeAddress.cep;
+    this.props.user.deliveryAddress.district = this.props.user.employeAddress.district;
+    this.props.user.deliveryAddress.street = this.props.user.employeAddress.street;
+    this.props.user.deliveryAddress.number = this.props.user.employeAddress.number;
+    this.props.user.deliveryAddress.complement = this.props.user.employeAddress.complement;
+    this.props.user.deliveryAddress.city = this.props.user.employeAddress.city;
+    this.props.user.deliveryAddress.state = this.props.user.employeAddress.state;
 
     this.props.goToNextForm();
   }

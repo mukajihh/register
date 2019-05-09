@@ -16,14 +16,17 @@ class Welcome extends Component {
   }
 
   componentWillMount() {
-    console.log(this.props.match.params.id);
     fetch('https://1psv428fe2.execute-api.us-east-1.amazonaws.com/dev/banky/v1/prospect/verify/' + this.props.match.params.id, {
       method: 'post'
     }).then(response => response.json())
     .then(response => {
-      this.setState({
-        name: ' ' + response.name.split(' ')[0]
-      })
+      if (response.name) {
+        this.setState({
+          name: ' ' + response.name.split(' ')[0]
+        })
+      } else {
+        // window.location.href = 'https://www.banky.com.br/';
+      }
       this.props.enableForm();
     });
   }
